@@ -1,6 +1,6 @@
 import React from 'react';
 
-const apiKey = 'ruASFSEceIVtYZIqmjctoDSS1UXy8Hlm';
+const apiKey = '6jsAeOGVARRAcYGiATeklAIOYGACDjaG';
 
 class CurrentWeather extends React.Component {
 	constructor(props) {
@@ -14,7 +14,7 @@ class CurrentWeather extends React.Component {
 
 	componentDidMount() {
 		const url = `http://dataservice.accuweather.com/currentconditions/v1/${this.props.location.key}?apikey=${apiKey}`;
-
+		
 		fetch(url)
 			.then(resp => resp.json())
 			.then(json => this.setState({

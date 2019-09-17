@@ -24,7 +24,7 @@ class App extends Component {
 	}
 
 	loadLocation = (location) => {
-		console.log('location2:', location);
+		console.log('location1:', location);
 		
 		this.setState({ location });
 	}
@@ -37,7 +37,7 @@ class App extends Component {
 					this.state.route === 'home' ?
 						<div className="App">
 							<h1>What's The Weather</h1>
-							{console.log('location1:', this.state.location)}
+							{console.log('location2:', this.state.location)}
 							<SearchField loadLocation={this.loadLocation} />
 							<WeatherDetails location={this.state.location} />
 						</div>

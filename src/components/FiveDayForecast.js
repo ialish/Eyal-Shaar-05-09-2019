@@ -1,9 +1,9 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 
-const apiKey = 'ruASFSEceIVtYZIqmjctoDSS1UXy8Hlm';
+const apiKey = '6jsAeOGVARRAcYGiATeklAIOYGACDjaG';
 
-class CurrentWeather extends React.Component {
+class FiveDayForecast extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -42,4 +42,4 @@ class CurrentWeather extends React.Component {
 	}
 }
 
-export default CurrentWeather;
+export default FiveDayForecast;
