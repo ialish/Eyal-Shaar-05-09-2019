@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 
-const apiKey = '6jsAeOGVARRAcYGiATeklAIOYGACDjaG';
+const apiKey = 'klsAekLLDPbYeFGlsF6zhhg275rbbgt';
 
 class FiveDayForecast extends React.Component {
 	constructor(props) {
@@ -11,7 +11,7 @@ class FiveDayForecast extends React.Component {
 		}
 	}
 
-	componentDidUpdate() {
+	componentDidMount() {
 		const url = `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${this.props.location.key}?apikey=${apiKey}&metric=true`;
 
 		fetch(url)
