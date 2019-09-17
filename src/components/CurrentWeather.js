@@ -12,7 +12,7 @@ class CurrentWeather extends React.Component {
 		}
 	}
 
-	componentDidMount() {
+	componentDidUpdate() {
 		const url = `http://dataservice.accuweather.com/currentconditions/v1/${this.props.location.key}?apikey=${apiKey}`;
 		
 		fetch(url)

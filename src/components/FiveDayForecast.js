@@ -11,7 +11,7 @@ class FiveDayForecast extends React.Component {
 		}
 	}
 
-	componentDidMount() {
+	componentDidUpdate() {
 		const url = `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${this.props.location.key}?apikey=${apiKey}&metric=true`;
 
 		fetch(url)
