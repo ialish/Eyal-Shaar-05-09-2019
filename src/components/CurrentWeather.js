@@ -12,9 +12,9 @@ class CurrentWeather extends React.Component {
 		}
 	}
 
-	componentDidMount() {
+	fetchForecast = () => {
 		const url = `http://dataservice.accuweather.com/currentconditions/v1/${this.props.location.key}?apikey=${apiKey}`;
-		
+
 		fetch(url)
 			.then(resp => resp.json())
 			.then(json => this.setState({
@@ -22,6 +22,17 @@ class CurrentWeather extends React.Component {
 				degreesC: json[0].Temperature.Metric.Value,
 				WeatherText: json[0].WeatherText
 			}));
+	}
+
+	componentDidMount() {
+		this.fetchForecast();
+	}
+	
+	componentDidUpdate(prevProps) {
+		const prevLocation = prevProps.location || {};
+		if (prevLocation.key !== this.props.location.key) {
+			this.fetchForecast();
+		}
 	}
 
 	render() {

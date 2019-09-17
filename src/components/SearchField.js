@@ -36,11 +36,13 @@ class SearchBox extends React.Component {
 			key: selectedOptions[0].Key,
 			city: selectedOptions[0].LocalizedName
 		});
+
+		this.clearRequest();
 	}
 	
-	// clearRequest = () => {
-	// 	this.setState({ options: [] });
-	// }
+	clearRequest = () => {
+		this.setState({ options: [] });
+	}
 
 	render() {
 		return (
