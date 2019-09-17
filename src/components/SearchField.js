@@ -41,7 +41,7 @@ class SearchBox extends React.Component {
 	}
 	
 	clearRequest = () => {
-		this.setState({ options: [] });
+		setTimeout(() => this.refs.SubjectTypeahead.getInstance().clear(), 0);
 	}
 
 	render() {
@@ -49,6 +49,7 @@ class SearchBox extends React.Component {
 			<div style={{ textAlign: 'center', width: 350 }}>
 				<AsyncTypeahead
 					id="AsyncTypeahead"
+					ref="SubjectTypeahead"
 					placeholder="Enter location"
 					isLoading={this.state.isLoading}
 					labelKey="LocalizedName"
