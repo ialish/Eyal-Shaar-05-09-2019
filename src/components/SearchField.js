@@ -21,7 +21,7 @@ class SearchBox extends React.Component {
 	onSearch = (query) => {
 		this.setState({ isLoading: true });
 
-		const url = `http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${apiKey}&q=${query}`;
+		const url = `https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${apiKey}&q=${query}`;
 
 		fetch(url)
 			.then(resp => resp.json())
