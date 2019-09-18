@@ -1,26 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Alert } from 'react-bootstrap';
-import CurrentWeather from '../components/CurrentWeather';
-import FiveDayForecast from '../components/FiveDayForecast';
+import FavoritesButton from './FavoritesButton/FavoritesButton';
+import CurrentWeather from './CurrentWeather';
+import FiveDayForecast from './FiveDayForecast';
 
-class WeatherDetails extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			
-		}
-	}
-
-	render() {
-		return (
-			<div>
-				<Alert variant={'success'} style={{ marginTop: 5, width: 460, height: 260 }}>
-					<CurrentWeather location={this.props.location} />
-					<FiveDayForecast location={this.props.location} />
-				</Alert>
-			</div>
-		);
-	}
+const WeatherDetails = ({ location }) => {
+	return (
+		<div>
+			<Alert variant={'success'} style={{ marginTop: 5, width: 460, height: 260 }}>
+				<FavoritesButton location={location} />
+				<CurrentWeather location={location} />
+				<FiveDayForecast location={location} />
+			</Alert>
+		</div>
+	);
 }
 
 export default WeatherDetails;

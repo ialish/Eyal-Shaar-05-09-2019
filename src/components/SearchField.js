@@ -2,7 +2,7 @@ import React from 'react';
 import { asyncContainer, Typeahead } from 'react-bootstrap-typeahead';
 
 const AsyncTypeahead = asyncContainer(Typeahead);
-const apiKey = 'klsAekLLDPbYeFGlsF6zhhg275rbbgt4';
+const apiKey = '8dBPkZi2ZK3ak4ak3UvqtEqpmyyzR8kL';
 
 class SearchBox extends React.Component {
 	constructor(props) {
