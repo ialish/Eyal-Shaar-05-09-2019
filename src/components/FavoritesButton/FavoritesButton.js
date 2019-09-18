@@ -30,6 +30,7 @@ class FavoritesButton extends Component {
 						: <img src={HeartFull} alt='Heart' width='35px' style={{ marginRight: 10 }}></img>
 				}
 				<Button variant="outline-danger" size="sm" onClick={this.addRemoveCity}>Add to Favorites</Button>
+			</div>
 		);
 	}
 }
