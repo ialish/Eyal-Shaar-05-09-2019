@@ -1,6 +1,6 @@
 import React from 'react';
 
-const apiKey = 'g5mR0vCkzgdwidFkOOAjmewAfHE4vyoS';
+const apiKey = 'nMRx8otmXihDcFOzxBaVBJVXM1OJ6O3Y';
 
 class CurrentWeather extends React.Component {
 	constructor(props) {
