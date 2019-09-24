@@ -7,28 +7,35 @@ class FavoritesButton extends Component {
 	constructor() {
 		super();
 		this.state = {
-			toggle: 'off',
+			heartImage: HeartHollow,
 			favCities: []
 		};
 	}
 
 	addRemoveCity = () => {
-		if (this.state.favCities.some(cityKey => (cityKey === this.props.location.key))) {
-			this.setState({ toggle: 'off' });
+		if (this.state.heartImage === HeartHollow) {
+			this.setState({
+				heartImage: HeartFull,
+				favCities: this.props.location
+			})
 		} else {
-			this.setState({ toggle: 'on' });
-			this.setState({ favCities: this.props.location.key });
+			let array = [...this.state.favCities];
+			const index = array.indexOf(this.props.location);
+			array.splice(index, 1);
+			this.setState({
+				heartImage: HeartHollow,
+				favCities: array
+			})
 		}
 	}
 
 	render() {
+		if (this.state.favCities.includes(this.props.location)) {
+			this.setState({ heartImage: HeartFull });
+		}
 		return (
 			<div style={{ float: 'right' }}>
-				{
-					this.state.toggle === 'off' ?
-						<img src={HeartHollow} alt='Heart' width='35px' style={{ marginRight: 10 }}></img>
-						: <img src={HeartFull} alt='Heart' width='35px' style={{ marginRight: 10 }}></img>
-				}
+				{<img src={this.state.heartImage} alt='Heart' width='35px' style={{ marginRight: 10 }}></img>}
 				<Button variant="outline-danger" size="sm" onClick={this.addRemoveCity}>Add to Favorites</Button>
 			</div>
 		);

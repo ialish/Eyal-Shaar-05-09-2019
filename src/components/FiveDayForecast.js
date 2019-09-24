@@ -36,9 +36,9 @@ class FiveDayForecast extends React.Component {
 		const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 		return (
 			<div style={{ display: 'flex', flexDirection: 'row', marginTop: '2rem' }}>
-				{this.state.DailyForecasts.map((day) => {
+				{this.state.DailyForecasts.map((day, index) => {
 					return (
-						<Card style={{ width: '18rem' }}>
+						<Card key={index} style={{ width: '18rem' }}>
 							<Card.Body>
 								<Card.Title>{days[new Date(day.EpochDate * 1000).getDay()]}</Card.Title>
 								<Card.Subtitle className="mb-2">
