@@ -8,29 +8,43 @@ class FavoritesButton extends Component {
 		super();
 		this.state = {
 			heartImage: HeartHollow,
-			favCities: [{
-				key: '215854',
-				city: 'Tel Aviv'
-			}]
+			favCities: []
 		};
 	}
 
-	componentDidMount() {
-		if (this.state.favCities.find(element => 
+	handleHeartImage = () => {
+		if (this.state.favCities.find(element =>
 			element.key === this.props.location.key)) {
-			this.setState({ heartImage: HeartFull });
+			if (this.state.heartImage === HeartHollow)
+				this.setState({ heartImage: HeartFull });
+		} else {
+			if (this.state.heartImage === HeartFull)
+				this.setState({ heartImage: HeartHollow });
 		}
 	}
 
+	componentDidMount() {
+		this.handleHeartImage();
+	}
+
+	componentDidUpdate() {
+		this.handleHeartImage();
+	}
+
 	addRemoveCity = () => {
+		let array = [...this.state.favCities];
+		
 		if (this.state.heartImage === HeartHollow) {
+			array.push(this.props.location);
 			this.setState({
 				heartImage: HeartFull,
-				favCities: this.props.location
+				favCities: array
 			})
 		} else {
-			let array = [...this.state.favCities];
-			const index = array.indexOf(this.props.location);
+			const index = array.findIndex(element =>
+				element.key === this.props.location.key);
+				console.log(index);
+				
 			array.splice(index, 1);
 			this.setState({
 				heartImage: HeartHollow,
@@ -40,6 +54,8 @@ class FavoritesButton extends Component {
 	}
 
 	render() {
+		console.log('favCities:', this.state.favCities);
+		
 		return (
 			<div style={{ float: 'right' }}>
 				{<img src={this.state.heartImage} alt='Heart' width='35px' style={{ marginRight: 10 }}></img>}
