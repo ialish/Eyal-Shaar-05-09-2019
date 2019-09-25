@@ -8,7 +8,7 @@ class CurrentWeather extends React.Component {
 		this.state = {
 			city: '',
 			degreesC: null,
-			WeatherText: ''
+			weatherText: ''
 		}
 	}
 
@@ -20,7 +20,7 @@ class CurrentWeather extends React.Component {
 			.then(json => this.setState({
 				city: this.props.location.city,
 				degreesC: json[0].Temperature.Metric.Value,
-				WeatherText: json[0].WeatherText
+				weatherText: json[0].WeatherText
 			}));
 	}
 
@@ -40,7 +40,7 @@ class CurrentWeather extends React.Component {
 			<div>
 				<h5>{this.state.city}</h5>
 				<h6>{Math.round(this.state.degreesC)}&deg;C</h6>
-				<h2 style={{ textAlign: 'center' }}>{this.state.WeatherText}</h2>
+				<h2 style={{ textAlign: 'center' }}>{this.state.weatherText}</h2>
 			</div>
 		);
 	}
