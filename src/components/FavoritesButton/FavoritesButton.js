@@ -12,6 +12,12 @@ class FavoritesButton extends Component {
 		};
 	}
 
+	componentDidMount() {
+		if (this.state.favCities.includes(this.props.location)) {
+			this.setState({ heartImage: HeartFull });
+		}
+	}
+
 	addRemoveCity = () => {
 		if (this.state.heartImage === HeartHollow) {
 			this.setState({
@@ -30,9 +36,6 @@ class FavoritesButton extends Component {
 	}
 
 	render() {
-		if (this.state.favCities.includes(this.props.location)) {
-			this.setState({ heartImage: HeartFull });
-		}
 		return (
 			<div style={{ float: 'right' }}>
 				{<img src={this.state.heartImage} alt='Heart' width='35px' style={{ marginRight: 10 }}></img>}
