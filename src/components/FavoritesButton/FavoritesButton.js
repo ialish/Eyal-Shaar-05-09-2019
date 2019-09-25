@@ -8,12 +8,16 @@ class FavoritesButton extends Component {
 		super();
 		this.state = {
 			heartImage: HeartHollow,
-			favCities: []
+			favCities: [{
+				key: '215854',
+				city: 'Tel Aviv'
+			}]
 		};
 	}
 
 	componentDidMount() {
-		if (this.state.favCities.includes(this.props.location)) {
+		if (this.state.favCities.find(element => 
+			element.key === this.props.location.key)) {
 			this.setState({ heartImage: HeartFull });
 		}
 	}
