@@ -25,10 +25,12 @@ class FavoritesButton extends Component {
 
 	componentDidMount() {
 		this.handleHeartImage();
+		this.setState({ favCities: JSON.parse(localStorage.getItem('Favorite Cities')) });
 	}
 
 	componentDidUpdate() {
 		this.handleHeartImage();
+		localStorage.setItem('Favorite Cities', JSON.stringify(this.state.favCities));
 	}
 
 	addRemoveCity = () => {
@@ -43,7 +45,6 @@ class FavoritesButton extends Component {
 		} else {
 			const index = array.findIndex(element =>
 				element.key === this.props.location.key);
-				console.log(index);
 				
 			array.splice(index, 1);
 			this.setState({
@@ -54,8 +55,6 @@ class FavoritesButton extends Component {
 	}
 
 	render() {
-		console.log('favCities:', this.state.favCities);
-		
 		return (
 			<div style={{ float: 'right' }}>
 				{<img src={this.state.heartImage} alt='Heart' width='35px' style={{ marginRight: 10 }}></img>}
