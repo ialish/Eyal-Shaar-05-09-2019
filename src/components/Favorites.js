@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card } from 'react-bootstrap';
 
-const apiKey = 'W0n1HPy5bdcPUrfoJqLph1EWeo0u1stp';
+const apiKey = 'eRQtGqe0oHVQ0SMMUleR1xdOj8GL55WV';
 
 class Favorites extends Component {
 	constructor() {
@@ -16,7 +16,6 @@ class Favorites extends Component {
 	}
 	
 	render() {
-		
 		return (
 			<div style={{ display: 'flex', flexDirection: 'row', marginTop: '2rem' }}>
 				{this.state.favCities.map((location) => {

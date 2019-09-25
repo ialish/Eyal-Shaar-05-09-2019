@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 
-const apiKey = 'W0n1HPy5bdcPUrfoJqLph1EWeo0u1stp';
+const apiKey = 'eRQtGqe0oHVQ0SMMUleR1xdOj8GL55WV';
 
 class FiveDayForecast extends React.Component {
 	constructor(props) {
