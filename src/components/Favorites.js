@@ -7,41 +7,44 @@ class Favorites extends Component {
 	constructor() {
 		super();
 		this.state = {
-			favCities: []
+			favCitiesData: []
 		};
 	}
-	
+
 	componentDidMount() {
-		this.setState({ favCities: JSON.parse(localStorage.getItem('Favorite Cities')) });
+		let favCitiesData = [];
+		let favCities = JSON.parse(localStorage.getItem('Favorite Cities'));
+		
+		favCities.map((cityId) => {
+			const url = `https://dataservice.accuweather.com/currentconditions/v1/${cityId.key}?apikey=${apiKey}`;
+			fetch(url)
+			.then(resp => resp.json())
+			.then(json => {
+				let degreesC = Math.round(json[0].Temperature.Metric.Value);
+				let weatherText = json[0].WeatherText;
+				favCitiesData.push({ cityId, degreesC, weatherText });
+			});
+		});
+
+		this.setState({ favCitiesData });
 	}
 	
 	render() {
-		if (!this.state.favCities.length)
+		if (!this.state.favCitiesData.length)
 			return null;
+		console.log('favCitiesData', this.favCitiesData);
 
-		let cards = this.state.favCities.map((location) => {
-			const url = `https://dataservice.accuweather.com/currentconditions/v1/${location.key}?apikey=${apiKey}`;
-			fetch(url)
-				.then(resp => resp.json())
-				.then(json => {
-					let degreesC = Math.round(json[0].Temperature.Metric.Value);
-					let weatherText = json[0].WeatherText;
-					return (
-						<Card key={location.key} style={{ width: '18rem' }}>
-							<Card.Body>
-								<Card.Title>{location.city}</Card.Title>
-								<Card.Subtitle className="mb-2">
-									{degreesC}
-									{weatherText}
-								</Card.Subtitle>
-							</Card.Body>
-						</Card>
-					);
-				});
-		});
-		
-		console.log('favCities:', this.state.favCities);
-		console.log('cards:', cards);
+		let cards = this.state.favCitiesData.map((location) => (
+			<Card key={location.cityId.key} style={{ width: '18rem' }}>
+				<Card.Body>
+					<Card.Title>{location.cityId.city}</Card.Title>
+					<Card.Subtitle className="mb-2">
+						{location.degreesC}
+						{location.weatherText}
+					</Card.Subtitle>
+				</Card.Body>
+			</Card>
+		));
 		
 		return (
 			<div style={{ display: 'flex', flexDirection: 'row', marginTop: '2rem' }}>
