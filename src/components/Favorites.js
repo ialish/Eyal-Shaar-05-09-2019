@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card } from 'react-bootstrap';
 
-const apiKey = 'eRQtGqe0oHVQ0SMMUleR1xdOj8GL55WV';
+const apiKey = 'w4bG0bSt7bzeEvB6vrfG6YX6tAl2BNrD';
 
 class Favorites extends Component {
 	constructor() {
@@ -14,49 +14,38 @@ class Favorites extends Component {
 	componentDidMount() {
 		this.setState({ favCities: JSON.parse(localStorage.getItem('Favorite Cities')) });
 	}
-
-	// componentDidUpdate() {
-	// 	this.state.favCities.map((location) => {
-	// 		const url = `https://dataservice.accuweather.com/currentconditions/v1/${location.key}?apikey=${apiKey}`;
-	// 		fetch(url)
-	// 			.then(resp => resp.json())
-	// 			.then(json => this.setState({
-	// 				degreesC: json[0].Temperature.Metric.Value,
-	// 				weatherText: json[0].WeatherText
-	// 			}));
-	// 	});
-	// }
 	
 	render() {
-		this.state.favCities.map((location) => {
+		if (!this.state.favCities.length)
+			return null;
+
+		let cards = this.state.favCities.map((location) => {
 			const url = `https://dataservice.accuweather.com/currentconditions/v1/${location.key}?apikey=${apiKey}`;
 			fetch(url)
 				.then(resp => resp.json())
-				.then(json => this.setState({
-					degreesC: json[0].Temperature.Metric.Value,
-					weatherText: json[0].WeatherText
-				}));
-		});
-		
-		console.log('favCities:', this.state.favCities);
-		
-		return (
-			<div style={{ display: 'flex', flexDirection: 'row', marginTop: '2rem' }}>
-				{
-					this.state.favCities.map((location) => {
-						return (
+				.then(json => {
+					let degreesC = Math.round(json[0].Temperature.Metric.Value);
+					let weatherText = json[0].WeatherText;
+					return (
 						<Card key={location.key} style={{ width: '18rem' }}>
 							<Card.Body>
 								<Card.Title>{location.city}</Card.Title>
 								<Card.Subtitle className="mb-2">
-									{location.degreesC}
-									{location.weatherText}
+									{degreesC}
+									{weatherText}
 								</Card.Subtitle>
 							</Card.Body>
 						</Card>
-						);
-					})
-				}
+					);
+				});
+		});
+		
+		console.log('favCities:', this.state.favCities);
+		console.log('cards:', cards);
+		
+		return (
+			<div style={{ display: 'flex', flexDirection: 'row', marginTop: '2rem' }}>
+				{ cards }
 			</div>
 		);
 	}
