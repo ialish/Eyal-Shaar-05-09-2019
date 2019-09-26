@@ -30,7 +30,10 @@ class App extends Component {
 	render() {
 		return (
 			<div>
-				<Navigation routeChange={this.onRouteChange} />
+				<Navigation
+					routeChange={this.onRouteChange}
+					route={this.state.route}
+				/>
 				{	
 					this.state.route === 'home' ?
 						<div className="App">
@@ -38,7 +41,10 @@ class App extends Component {
 							<SearchField loadLocation={this.loadLocation} />
 							<WeatherDetails location={this.state.location} />
 						</div>
-					: <Favorites />
+					: <Favorites
+							loadLocation={this.loadLocation}
+							routeChange={this.onRouteChange}
+						/>
 				}				
 			</div>
 		);

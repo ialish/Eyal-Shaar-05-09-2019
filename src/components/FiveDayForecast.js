@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 
-const apiKey = 'w4bG0bSt7bzeEvB6vrfG6YX6tAl2BNrD';
+const apiKey = 'cMR4NPXFGyK6UXqUSwj6q0a0R1f5EB0m';
 
 class FiveDayForecast extends React.Component {
 	constructor(props) {
@@ -40,8 +40,8 @@ class FiveDayForecast extends React.Component {
 					return (
 						<Card key={index} style={{ width: '18rem' }}>
 							<Card.Body>
-								<Card.Title>{days[new Date(day.EpochDate * 1000).getDay()]}</Card.Title>
-								<Card.Subtitle className="mb-2">
+								<Card.Title style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{days[new Date(day.EpochDate * 1000).getDay()]}</Card.Title>
+								<Card.Subtitle className="mb-2" style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
 									{Math.round((day.Temperature.Minimum.Value + day.Temperature.Maximum.Value) / 2)}&deg;C
 								</Card.Subtitle>
 							</Card.Body>
