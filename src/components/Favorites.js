@@ -15,35 +15,48 @@ class Favorites extends Component {
 		this.setState({ favCities: JSON.parse(localStorage.getItem('Favorite Cities')) });
 	}
 
-	componentDidUpdate() {
-		this.state.favCities.map((location) => {
-			const url = `https://dataservice.accuweather.com/currentconditions/v1/${location.key}?apikey=${apiKey}`;
-			let degreesC = null;
-			let weatherText = '';
-			fetch(url)
-				.then(resp => resp.json())
-				.then(json => {
-					degreesC = Math.round(json[0].Temperature.Metric.Value);
-					weatherText = json[0].WeatherText;
-				});
-			return (
-				<Card key={location.key} style={{ width: '18rem' }}>
-					<Card.Body>
-						<Card.Title>{location.city}</Card.Title>
-						<Card.Subtitle className="mb-2">
-							{degreesC}
-							{weatherText}
-						</Card.Subtitle>
-					</Card.Body>
-				</Card>
-			);
-		})
-	}
+	// componentDidUpdate() {
+	// 	this.state.favCities.map((location) => {
+	// 		const url = `https://dataservice.accuweather.com/currentconditions/v1/${location.key}?apikey=${apiKey}`;
+	// 		fetch(url)
+	// 			.then(resp => resp.json())
+	// 			.then(json => this.setState({
+	// 				degreesC: json[0].Temperature.Metric.Value,
+	// 				weatherText: json[0].WeatherText
+	// 			}));
+	// 	});
+	// }
 	
 	render() {
+		this.state.favCities.map((location) => {
+			const url = `https://dataservice.accuweather.com/currentconditions/v1/${location.key}?apikey=${apiKey}`;
+			fetch(url)
+				.then(resp => resp.json())
+				.then(json => this.setState({
+					degreesC: json[0].Temperature.Metric.Value,
+					weatherText: json[0].WeatherText
+				}));
+		});
+		
+		console.log('favCities:', this.state.favCities);
+		
 		return (
 			<div style={{ display: 'flex', flexDirection: 'row', marginTop: '2rem' }}>
-				{}
+				{
+					this.state.favCities.map((location) => {
+						return (
+						<Card key={location.key} style={{ width: '18rem' }}>
+							<Card.Body>
+								<Card.Title>{location.city}</Card.Title>
+								<Card.Subtitle className="mb-2">
+									{location.degreesC}
+									{location.weatherText}
+								</Card.Subtitle>
+							</Card.Body>
+						</Card>
+						);
+					})
+				}
 			</div>
 		);
 	}
