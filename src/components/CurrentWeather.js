@@ -1,6 +1,7 @@
 import React from 'react';
+import HandleError from './HandleError';
 
-const apiKey = 'cMR4NPXFGyK6UXqUSwj6q0a0R1f5EB0m';
+const apiKey = 'rgaRO2u3sZDeRZHX8aGbZxEGCzphb2iS';
 
 class CurrentWeather extends React.Component {
 	constructor(props) {
@@ -8,7 +9,8 @@ class CurrentWeather extends React.Component {
 		this.state = {
 			city: '',
 			degreesC: null,
-			weatherText: ''
+			weatherText: '',
+			fetchError: ''
 		}
 	}
 
@@ -21,7 +23,8 @@ class CurrentWeather extends React.Component {
 				city: this.props.location.city,
 				degreesC: json[0].Temperature.Metric.Value,
 				weatherText: json[0].WeatherText
-			}));
+			}))
+			.catch(err => this.setState({ fetchError: err.message }));
 	}
 
 	componentDidMount() {
@@ -36,11 +39,24 @@ class CurrentWeather extends React.Component {
 	}
 
 	render() {
+		let fetchError;
+
+		if (this.state.fetchError) {
+			fetchError = (
+				<HandleError
+					name={`Error: ${this.state.fetchError}!`}
+					description={'Failed to fetch data from the server.'}
+				/>
+			);
+		}
 		return (
 			<div>
 				<h5>{this.state.city}</h5>
 				<h6>{Math.round(this.state.degreesC)}&deg;C</h6>
 				<h2 style={{ textAlign: 'center' }}>{this.state.weatherText}</h2>
+				<div style={{ zIndex: 1, position: 'fixed', top: 0, left: 0 }}>
+					{fetchError}
+				</div>
 			</div>
 		);
 	}

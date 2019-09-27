@@ -1,8 +1,9 @@
 import React from 'react';
 import { asyncContainer, Typeahead } from 'react-bootstrap-typeahead';
+import HandleError from './HandleError';
 
 const AsyncTypeahead = asyncContainer(Typeahead);
-const apiKey = 'cMR4NPXFGyK6UXqUSwj6q0a0R1f5EB0m';
+const apiKey = 'rgaRO2u3sZDeRZHX8aGbZxEGCzphb2iS';
 
 class SearchBox extends React.Component {
 	constructor(props) {
@@ -10,7 +11,8 @@ class SearchBox extends React.Component {
 		this.state = {
 			isLoading: false,
 			options: [],
-			query: ''
+			query: '',
+			fetchError: ''
 		}
 	}
 
@@ -28,7 +30,8 @@ class SearchBox extends React.Component {
 			.then(json => this.setState({
 				isLoading: false,
 				options: json
-			}));
+			}))
+			.catch(err => this.setState({ fetchError: err.message }));
 	}
 	
 	onChange = (selectedOptions) => {
@@ -45,8 +48,30 @@ class SearchBox extends React.Component {
 	}
 
 	render() {
+		let fetchError;
+		let mistype;
+		const availableChars = /^[0-9a-zA-Z]*$/;
+
+		if (this.state.fetchError) {
+			fetchError = (
+				<HandleError
+					name={`Error: ${this.state.fetchError}!`}
+					description={'Failed to fetch data from the server.'}
+				/>
+			);
+		}
+		
+		if (!this.state.query.match(availableChars)) {
+			mistype = (
+				<HandleError
+					name={'Error: Mistype!'}
+					description={'Only english letters are allowed.'}
+				/>
+			);
+		}
+		
 		return (
-			<div style={{ textAlign: 'center', width: 350 }}>
+			<div style={{ width: 350 }}>
 				<AsyncTypeahead
 					id="AsyncTypeahead"
 					ref="SubjectTypeahead"
@@ -58,6 +83,10 @@ class SearchBox extends React.Component {
 					options={this.state.options}
 					onChange={this.onChange}
 				/>
+				<div style={{ zIndex: 1, position: 'fixed', top: 0, left: 0 }}>
+					{ fetchError }
+					{ mistype }
+				</div>
 			</div>
 		);
 	}

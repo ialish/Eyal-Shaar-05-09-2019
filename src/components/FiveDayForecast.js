@@ -1,13 +1,15 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
+import HandleError from './HandleError';
 
-const apiKey = 'cMR4NPXFGyK6UXqUSwj6q0a0R1f5EB0m';
+const apiKey = 'rgaRO2u3sZDeRZHX8aGbZxEGCzphb2iS';
 
 class FiveDayForecast extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			DailyForecasts: []
+			DailyForecasts: [],
+			fetchError: ''
 		}
 	}
 
@@ -18,7 +20,8 @@ class FiveDayForecast extends React.Component {
 			.then(resp => resp.json())
 			.then(json => this.setState({
 				DailyForecasts: json.DailyForecasts
-			}));
+			}))
+			.catch(err => this.setState({ fetchError: err.message }));
 	}
 
 	componentDidMount() {
@@ -34,6 +37,16 @@ class FiveDayForecast extends React.Component {
 
 	render() {
 		const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+		let fetchError;
+
+		if (this.state.fetchError) {
+			fetchError = (
+				<HandleError
+					name={`Error: ${this.state.fetchError}!`}
+					description={'Failed to fetch data from the server.'}
+				/>
+			);
+		}
 		return (
 			<div style={{ display: 'flex', flexDirection: 'row', marginTop: '2rem' }}>
 				{this.state.DailyForecasts.map((day, index) => {
@@ -48,6 +61,9 @@ class FiveDayForecast extends React.Component {
 						</Card>
 					);
 				})}
+				<div style={{ zIndex: 1, position: 'fixed', top: 0, left: 0 }}>
+					{fetchError}
+				</div>
 			</div>
 		);
 	}

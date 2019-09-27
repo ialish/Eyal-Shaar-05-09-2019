@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { Card } from 'react-bootstrap';
+import HandleError from './HandleError';
 
-const apiKey = 'cMR4NPXFGyK6UXqUSwj6q0a0R1f5EB0m';
+const apiKey = 'rgaRO2u3sZDeRZHX8aGbZxEGCzphb2iS';
 
 class Favorites extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			favCitiesData: []
+			favCitiesData: [],
+			fetchError: ''
 		};
 	}
 	
@@ -22,7 +24,8 @@ class Favorites extends Component {
 					let weatherText = json[0].WeatherText;
 					favCitiesData.push({ location, degreesC, weatherText });
 					this.setState({ favCitiesData });
-				});
+				})
+				.catch(err => this.setState({ fetchError: err.message }));
 		});
 	}
 
@@ -40,6 +43,21 @@ class Favorites extends Component {
 	}
 
 	render() {
+		let fetchError;
+		if (this.state.fetchError) {
+			fetchError = (
+				<HandleError
+					name={`Error: ${this.state.fetchError}!`}
+					description={`Failed to fetch data from the server.`}
+				/>
+			);
+			return (
+				<div style={{ zIndex: 1, position: 'fixed', top: 0, left: 0 }}>
+					{fetchError}
+				</div>
+			);
+		}
+
 		if (!this.state.favCitiesData.length)
 		return null;
 
@@ -59,7 +77,7 @@ class Favorites extends Component {
 				</Card.Body>
 			</Card>
 		));
-		
+
 		return (
 			<div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', marginTop: '1.5rem', marginLeft: '1rem' }}>
 				{ cards }
