@@ -7,8 +7,8 @@ class FavoritesButton extends Component {
 	constructor() {
 		super();
 		this.state = {
-			favCities: [],
-			heartImage: HeartHollow
+			heartImage: HeartHollow,
+			favCities: []
 		};
 	}
 
