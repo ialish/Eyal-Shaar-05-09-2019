@@ -2,7 +2,8 @@ import React from 'react';
 import { Nav } from 'react-bootstrap';
 
 const navStyle = {
-	backgroundColor: 'rgba(250, 250, 250, 0.9)'
+	backgroundColor: 'rgba(250, 250, 250, 0.9)',
+	width: '100%'
 };
 
 const Navigation = ({ routeChange, route }) => {
