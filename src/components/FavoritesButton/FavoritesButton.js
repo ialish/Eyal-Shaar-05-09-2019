@@ -36,7 +36,13 @@ class FavoritesButton extends Component {
 	}
 
 	addRemoveCity = () => {
-		let array = [...this.state.favCities];
+		let array;
+
+		if (this.state.favCities) {
+			array = [...this.state.favCities];
+		} else {
+			array = [];
+		}
 		
 		if (this.state.heartImage === HeartHollow) {
 			array.push(this.props.location);

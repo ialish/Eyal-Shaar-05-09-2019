@@ -3,7 +3,7 @@ import { asyncContainer, Typeahead } from 'react-bootstrap-typeahead';
 import HandleError from './HandleError';
 
 const AsyncTypeahead = asyncContainer(Typeahead);
-const apiKey = 'H7MKGnc9kjgyEaHLEe76yN4zWuNoWjRH';
+const apiKey = 'jgmaqaYSqa8MqGQLByKEhzQVdqtu4XE3';
 
 class SearchBox extends React.Component {
 	constructor(props) {
