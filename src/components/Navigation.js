@@ -8,7 +8,7 @@ const navStyle = {
 
 const Navigation = ({ routeChange, route }) => {
 	return (
-		<Nav className="justify-content-end" style={navStyle} variant="pills" defaultActiveKey="home">
+		<Nav className="justify-content-end" style={navStyle} variant="pills" defaultActiveKey={route}>
 			<Nav.Item>
 				<Nav.Link eventKey="home" onClick={() => routeChange('home')}>
 					Home
