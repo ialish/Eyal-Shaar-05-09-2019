@@ -15,25 +15,25 @@ class Favorites extends Component {
 	
 	fetchData = (favCities) => {
 		let favCitiesData = [];
-		favCities.forEach((location) => {
-			const url = `https://dataservice.accuweather.com/currentconditions/v1/${location.key}?apikey=${apiKey}`;
-			fetch(url)
-				.then(resp => resp.json())
-				.then(json => {
-					let degreesC = Math.round(json[0].Temperature.Metric.Value);
-					let weatherText = json[0].WeatherText;
-					favCitiesData.push({ location, degreesC, weatherText });
-					this.setState({ favCitiesData });
-				})
-				.catch(err => this.setState({ fetchError: err.message }));
-		});
+		if (favCities) {
+			favCities.forEach((location) => {
+				const url = `https://dataservice.accuweather.com/currentconditions/v1/${location.key}?apikey=${apiKey}`;
+				fetch(url)
+					.then(resp => resp.json())
+					.then(json => {
+						let degreesC = Math.round(json[0].Temperature.Metric.Value);
+						let weatherText = json[0].WeatherText;
+						favCitiesData.push({ location, degreesC, weatherText });
+						this.setState({ favCitiesData });
+					})
+					.catch(err => this.setState({ fetchError: err.message }));
+			});
+		}
 	}
 
 	componentDidMount() {
 		let favCities = JSON.parse(localStorage.getItem('Favorite Cities'));
-		if (favCities) {
-			this.fetchData(favCities);
-		}
+		this.fetchData(favCities);
 	}
 
 	handleOnClick = (cityData) =>{
