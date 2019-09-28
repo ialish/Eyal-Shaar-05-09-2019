@@ -26,8 +26,8 @@ class FavoritesButton extends Component {
 	}
 
 	componentDidMount() {
-		this.handleHeartImage();
 		this.setState({ favCities: JSON.parse(localStorage.getItem('Favorite Cities')) });
+		this.handleHeartImage();
 	}
 
 	componentDidUpdate() {
