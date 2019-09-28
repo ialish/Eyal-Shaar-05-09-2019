@@ -2,7 +2,7 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 import HandleError from './HandleError';
 
-const apiKey = 'rgaRO2u3sZDeRZHX8aGbZxEGCzphb2iS';
+const apiKey = 'GBQOaTaovFvWYmzOoH4RFrCGKnhKaJOd';
 
 class FiveDayForecast extends React.Component {
 	constructor(props) {
