@@ -30,10 +30,10 @@ class Favorites extends Component {
 	}
 
 	componentDidMount() {
+		let favCities = JSON.parse(localStorage.getItem('Favorite Cities'));
 		if (favCities) {
 			this.fetchData(favCities);
 		}
-		let favCities = JSON.parse(localStorage.getItem('Favorite Cities'));
 	}
 
 	handleOnClick = (cityData) =>{
