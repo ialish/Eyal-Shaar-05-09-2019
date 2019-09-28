@@ -13,21 +13,21 @@ class FavoritesButton extends Component {
 	}
 
 	handleHeartImage = () => {
-		if (this.state.favCities.find(element =>
-			element.key === this.props.location.key)) {
-			if (this.state.heartImage === HeartHollow)
-				this.setState({ heartImage: HeartFull });
-		} else {
-			if (this.state.heartImage === HeartFull)
-				this.setState({ heartImage: HeartHollow });
+		if (this.state.favCities) {
+			if (this.state.favCities.find(element =>
+				element.key === this.props.location.key)) {
+				if (this.state.heartImage === HeartHollow)
+					this.setState({ heartImage: HeartFull });
+			} else {
+				if (this.state.heartImage === HeartFull)
+					this.setState({ heartImage: HeartHollow });
+			}
 		}
 	}
 
 	componentDidMount() {
 		this.setState({ favCities: JSON.parse(localStorage.getItem('Favorite Cities')) });
-		if (this.state.favCities) {
-			this.handleHeartImage();
-		}
+		this.handleHeartImage();
 	}
 
 	componentDidUpdate() {
