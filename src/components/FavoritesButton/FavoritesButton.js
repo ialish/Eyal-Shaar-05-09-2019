@@ -24,10 +24,10 @@ class FavoritesButton extends Component {
 	}
 
 	componentDidMount() {
-		this.setState({ favCities: JSON.parse(localStorage.getItem('Favorite Cities')) });
 		if (this.state.favCities) {
 			this.handleHeartImage();
 		}
+		this.setState({ favCities: JSON.parse(localStorage.getItem('Favorite Cities')) });
 	}
 
 	componentDidUpdate() {
