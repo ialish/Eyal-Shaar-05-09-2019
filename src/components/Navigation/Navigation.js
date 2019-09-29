@@ -4,7 +4,7 @@ import { Nav } from 'react-bootstrap';
 
 const Navigation = ({ routeChange, route }) => {
 	return (
-		<Nav className="justify-content-end nav-bar" variant="pills" defaultActiveKey={route}>
+		<Nav className="justify-content-end nav-bar" defaultActiveKey={route}>
 			<Nav.Item>
 				<Nav.Link eventKey="home" onClick={() => routeChange('home')}>
 					Home
