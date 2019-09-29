@@ -1,7 +1,8 @@
 import React from 'react';
-import HandleError from './HandleError';
+import './CurrentWeather.css';
+import HandleError from '../HandleError';
 
-const apiKey = 'z21R9ZnuD59rgzSrYCWF3pc5tdrJF63A';
+const apiKey = 'VupsvOGgYMktgvdrd8AbPsGYr0yJIZHP';
 
 class CurrentWeather extends React.Component {
 	constructor(props) {
@@ -40,7 +41,6 @@ class CurrentWeather extends React.Component {
 
 	render() {
 		let fetchError;
-
 		if (this.state.fetchError) {
 			fetchError = (
 				<HandleError
@@ -53,8 +53,8 @@ class CurrentWeather extends React.Component {
 			<div>
 				<h5>{this.state.city}</h5>
 				<h6>{Math.round(this.state.degreesC)}&deg;C</h6>
-				<h2 style={{ marginTop: '1rem', textAlign: 'center' }}>{this.state.weatherText}</h2>
-				<div style={{ zIndex: 1, position: 'fixed', top: 0, left: 0 }}>
+				<h2 className='weather-text'>{this.state.weatherText}</h2>
+				<div className='error-msg'>
 					{fetchError}
 				</div>
 			</div>

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Alert } from 'react-bootstrap';
-import FavoritesButton from './FavoritesButton/FavoritesButton';
-import CurrentWeather from './CurrentWeather';
-import FiveDayForecast from './FiveDayForecast';
+import FavoritesButton from '../FavoritesButton/FavoritesButton';
+import CurrentWeather from '../CurrentWeather/CurrentWeather';
+import FiveDayForecast from '../FiveDayForecast/FiveDayForecast';
 
 const WeatherDetails = ({ location }) => {
 	return (

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import './Favorites.css';
 import { Card } from 'react-bootstrap';
-import HandleError from './HandleError';
+import HandleError from '../HandleError';
 
-const apiKey = 'z21R9ZnuD59rgzSrYCWF3pc5tdrJF63A';
+const apiKey = 'VupsvOGgYMktgvdrd8AbPsGYr0yJIZHP';
 
 class Favorites extends Component {
 	constructor(props) {
@@ -54,25 +55,26 @@ class Favorites extends Component {
 				/>
 			);
 			return (
-				<div style={{ zIndex: 1, position: 'fixed', top: 0, left: 0 }}>
+				<div className='error-msg'>
 					{fetchError}
 				</div>
 			);
 		}
 
-		if (!this.state.favCitiesData.length)
-		return null;
+		if (!this.state.favCitiesData.length) {
+			return null;
+		}
 
 		let cards = this.state.favCitiesData.map((cityData) => (
-			<Card key={cityData.location.key} style={{ display: 'flex', alignItems: 'center', width: '150px', marginRight: '1rem', marginBottom: '1rem' }}>
+			<Card className='card' key={cityData.location.key}>
 				<Card.Body>
-					<Card.Title 
-						style={{ display: 'flex', alignItems: 'center',justifyContent: 'center', marginTop: '.5rem', marginBottom: '1.5rem', cursor: 'pointer' }}
+					<Card.Title
+						className='card-title'
 						onClick={() => this.handleOnClick(cityData)}
 					>
 						{cityData.location.city}
 					</Card.Title>
-					<Card.Subtitle className="mb-2" style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+					<Card.Subtitle className="mb-2 card-subtitle">
 						<h3>{cityData.degreesC}&deg;C</h3>
 						<h6>{cityData.weatherText}</h6>
 					</Card.Subtitle>
@@ -81,7 +83,7 @@ class Favorites extends Component {
 		));
 
 		return (
-			<div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', marginTop: '1.5rem', marginLeft: '1rem' }}>
+			<div className='cards'>
 				{ cards }
 			</div>
 		);

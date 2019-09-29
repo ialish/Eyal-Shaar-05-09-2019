@@ -1,9 +1,9 @@
 import React from 'react';
 import { asyncContainer, Typeahead } from 'react-bootstrap-typeahead';
-import HandleError from './HandleError';
+import HandleError from '../HandleError';
 
 const AsyncTypeahead = asyncContainer(Typeahead);
-const apiKey = 'z21R9ZnuD59rgzSrYCWF3pc5tdrJF63A';
+const apiKey = 'VupsvOGgYMktgvdrd8AbPsGYr0yJIZHP';
 
 class SearchBox extends React.Component {
 	constructor(props) {
@@ -49,18 +49,17 @@ class SearchBox extends React.Component {
 
 	render() {
 		let fetchError;
-		let mistype;
-		const availableChars = /^[0-9a-zA-Z]*$/;
-
 		if (this.state.fetchError) {
 			fetchError = (
 				<HandleError
-					name={`Error: ${this.state.fetchError}!`}
-					description={'Failed to fetch data from the server.'}
+				name={`Error: ${this.state.fetchError}!`}
+				description={'Failed to fetch data from the server.'}
 				/>
-			);
-		}
-		
+				);
+			}
+			
+		let mistype;
+		const availableChars = /^[0-9a-zA-Z]*$/;
 		if (!this.state.query.match(availableChars)) {
 			mistype = (
 				<HandleError

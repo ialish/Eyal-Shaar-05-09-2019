@@ -1,0 +1,11 @@
+.error-msg {
+	z-index: 1;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+.weather-text {
+	margin-top: 1rem;
+	text-align: center;
+}

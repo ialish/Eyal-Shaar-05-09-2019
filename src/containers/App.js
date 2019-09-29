@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import Navigation from '../components/Navigation';
-import SearchField from '../components/SearchField';
-import WeatherDetails from '../components/WeatherDetails';
-import Favorites from '../components/Favorites';
+import Navigation from '../components/Navigation/Navigation';
+import SearchField from '../components/SearchField/SearchField';
+import WeatherDetails from '../components/WeatherDetails/WeatherDetails';
+import Favorites from '../components/Favorites/Favorites';
 
 const defaultLocation = {
 	key: '215854',

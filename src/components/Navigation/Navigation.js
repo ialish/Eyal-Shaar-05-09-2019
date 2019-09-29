@@ -1,14 +1,10 @@
 import React from 'react';
+import './Navigation.css';
 import { Nav } from 'react-bootstrap';
-
-const navStyle = {
-	backgroundColor: 'rgba(250, 250, 250, 0.9)',
-	width: '100%'
-};
 
 const Navigation = ({ routeChange, route }) => {
 	return (
-		<Nav className="justify-content-end" style={navStyle} variant="pills" defaultActiveKey={route}>
+		<Nav className="justify-content-end nav-bar" variant="pills" defaultActiveKey={route}>
 			<Nav.Item>
 				<Nav.Link eventKey="home" onClick={() => routeChange('home')}>
 					Home
