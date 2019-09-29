@@ -7,7 +7,7 @@ import FiveDayForecast from './FiveDayForecast';
 const WeatherDetails = ({ location }) => {
 	return (
 		<div>
-			<Alert variant={'success'} style={{ marginTop: 5, maxWidth: 450, height: 260, maxHeight: 1000 }}>
+			<Alert variant={'success'} style={{ marginTop: 5, maxWidth: '100%', height: '100%' }}>
 				<FavoritesButton location={location} />
 				<CurrentWeather location={location} />
 				<FiveDayForecast location={location} />
