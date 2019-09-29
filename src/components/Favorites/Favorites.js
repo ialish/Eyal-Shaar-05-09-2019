@@ -3,7 +3,7 @@ import './Favorites.css';
 import { Card } from 'react-bootstrap';
 import HandleError from '../HandleError';
 
-const apiKey = 'VupsvOGgYMktgvdrd8AbPsGYr0yJIZHP';
+const apiKey = 'sVHvQTA0yb2tOUAwEA6hrti883uUGrsA';
 
 class Favorites extends Component {
 	constructor(props) {
