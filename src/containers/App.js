@@ -37,7 +37,7 @@ class App extends Component {
 				{
 					this.state.route === 'home' ?
 						<div className="App">
-							<h1>What's The Weather</h1>
+							<h1>Weather Forecast</h1>
 							<SearchField loadLocation={this.loadLocation} />
 							<WeatherDetails location={this.state.location} />
 						</div>
