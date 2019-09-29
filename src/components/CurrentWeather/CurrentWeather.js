@@ -51,7 +51,7 @@ class CurrentWeather extends React.Component {
 		}
 		return (
 			<div>
-				<h5>{this.state.city}</h5>
+				<h5 className='city'>{this.state.city}</h5>
 				<h6>{Math.round(this.state.degreesC)}&deg;C</h6>
 				<h2 className='weather-text'>{this.state.weatherText}</h2>
 				<div className='error-msg'>
