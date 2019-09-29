@@ -41,10 +41,13 @@ class App extends Component {
 							<SearchField loadLocation={this.loadLocation} />
 							<WeatherDetails location={this.state.location} />
 						</div>
-						: <Favorites
-							loadLocation={this.loadLocation}
-							routeChange={this.onRouteChange}
-						/>
+					: <div className="App">
+							<h1>My Favorites</h1>
+							<Favorites
+								loadLocation={this.loadLocation}
+								routeChange={this.onRouteChange}
+							/>
+						</div>
 				}
 			</div>
 		);
