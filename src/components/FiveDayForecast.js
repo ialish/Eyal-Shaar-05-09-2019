@@ -48,7 +48,7 @@ class FiveDayForecast extends React.Component {
 			);
 		}
 		return (
-			<div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', marginTop: '2rem' }}>
+			<div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', marginTop: '2rem' }}>
 				{this.state.DailyForecasts.map((day, index) => {
 					return (
 						<Card key={index} style={{ width: '5rem' }}>
