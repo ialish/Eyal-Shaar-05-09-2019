@@ -71,7 +71,7 @@ class SearchBox extends React.Component {
 		}
 		
 		return (
-			<div style={{ width: 350 }}>
+			<div style={{ width: 200 }}>
 				<AsyncTypeahead
 					id="AsyncTypeahead"
 					ref="SubjectTypeahead"
