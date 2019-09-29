@@ -4,7 +4,5 @@ html, body {
   -moz-background-size: cover;
   -o-background-size: cover;
 	background-size: cover;
-	width: 100%;
-	height: 100%;
 	font-family: sans-serif, source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
