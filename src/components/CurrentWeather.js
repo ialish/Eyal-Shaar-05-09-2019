@@ -53,7 +53,7 @@ class CurrentWeather extends React.Component {
 			<div>
 				<h5>{this.state.city}</h5>
 				<h6>{Math.round(this.state.degreesC)}&deg;C</h6>
-				<h2 style={{ textAlign: 'center' }}>{this.state.weatherText}</h2>
+				<h2 style={{ marginTop: '1rem', textAlign: 'center' }}>{this.state.weatherText}</h2>
 				<div style={{ zIndex: 1, position: 'fixed', top: 0, left: 0 }}>
 					{fetchError}
 				</div>
