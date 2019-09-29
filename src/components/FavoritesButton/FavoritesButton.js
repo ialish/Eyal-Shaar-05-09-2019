@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './FavoritesButton.css';
 import HeartHollow from './HeartHollow.svg';
 import HeartFull from './HeartFull.svg';
 import { Button } from 'react-bootstrap';
@@ -64,8 +65,8 @@ class FavoritesButton extends Component {
 
 	render() {
 		return (
-			<div style={{ float: 'right' }}>
-				{<img src={this.state.heartImage} alt='Heart' width='35px' style={{ marginRight: 10 }}></img>}
+			<div className='favorites-button'>
+				<img src={this.state.heartImage} alt='Heart' width='35px'></img>
 				<Button variant="outline-danger" size="sm" onClick={this.addRemoveCity}>Add to Favorites</Button>
 			</div>
 		);

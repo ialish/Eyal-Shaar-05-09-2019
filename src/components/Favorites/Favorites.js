@@ -66,15 +66,15 @@ class Favorites extends Component {
 		}
 
 		let cards = this.state.favCitiesData.map((cityData) => (
-			<Card className='card' key={cityData.location.key}>
+			<Card className='favorites-card' key={cityData.location.key}>
 				<Card.Body>
 					<Card.Title
-						className='card-title'
+						className='favorites-card-title'
 						onClick={() => this.handleOnClick(cityData)}
 					>
 						{cityData.location.city}
 					</Card.Title>
-					<Card.Subtitle className="mb-2 card-subtitle">
+					<Card.Subtitle className="mb-2 favorites-card-subtitle">
 						<h3>{cityData.degreesC}&deg;C</h3>
 						<h6>{cityData.weatherText}</h6>
 					</Card.Subtitle>
@@ -83,7 +83,7 @@ class Favorites extends Component {
 		));
 
 		return (
-			<div className='cards'>
+			<div className='favorites-cards'>
 				{ cards }
 			</div>
 		);

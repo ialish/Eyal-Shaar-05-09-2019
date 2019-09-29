@@ -1,11 +1,12 @@
 import React from 'react';
+import './SearchField.css';
 import { asyncContainer, Typeahead } from 'react-bootstrap-typeahead';
 import HandleError from '../HandleError';
 
 const AsyncTypeahead = asyncContainer(Typeahead);
 const apiKey = 'VupsvOGgYMktgvdrd8AbPsGYr0yJIZHP';
 
-class SearchBox extends React.Component {
+class SearchField extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -70,7 +71,7 @@ class SearchBox extends React.Component {
 		}
 		
 		return (
-			<div style={{ width: 200 }}>
+			<div className='search-field'>
 				<AsyncTypeahead
 					id="AsyncTypeahead"
 					ref="SubjectTypeahead"
@@ -82,7 +83,7 @@ class SearchBox extends React.Component {
 					options={this.state.options}
 					onChange={this.onChange}
 				/>
-				<div style={{ zIndex: 1, position: 'fixed', top: 0, left: 0 }}>
+				<div className='error-msg'>
 					{ fetchError }
 					{ mistype }
 				</div>
@@ -91,4 +92,4 @@ class SearchBox extends React.Component {
 	}
 }
 
-export default SearchBox;
+export default SearchField;

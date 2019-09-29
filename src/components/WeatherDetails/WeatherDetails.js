@@ -1,4 +1,5 @@
 import React from 'react';
+import './WeatherDetails.css';
 import { Alert } from 'react-bootstrap';
 import FavoritesButton from '../FavoritesButton/FavoritesButton';
 import CurrentWeather from '../CurrentWeather/CurrentWeather';
@@ -7,7 +8,7 @@ import FiveDayForecast from '../FiveDayForecast/FiveDayForecast';
 const WeatherDetails = ({ location }) => {
 	return (
 		<div>
-			<Alert variant={'success'} style={{ marginTop: 5, width: '100%', height: '100%' }}>
+			<Alert className='background-box' variant={'success'}>
 				<FavoritesButton location={location} />
 				<CurrentWeather location={location} />
 				<FiveDayForecast location={location} />

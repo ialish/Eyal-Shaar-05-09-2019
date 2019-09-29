@@ -1,4 +1,5 @@
 import React from 'react';
+import './FiveDayForecast.css';
 import { Card } from 'react-bootstrap';
 import HandleError from '../HandleError';
 
@@ -48,20 +49,22 @@ class FiveDayForecast extends React.Component {
 			);
 		}
 		return (
-			<div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', marginTop: '1rem' }}>
+			<div className='five-day-cards'>
 				{this.state.DailyForecasts.map((day, index) => {
 					return (
-						<Card key={index} style={{ width: '5rem' }}>
+						<Card className='five-day-card' key={index}>
 							<Card.Body>
-								<Card.Title style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{days[new Date(day.EpochDate * 1000).getDay()]}</Card.Title>
-								<Card.Subtitle className="mb-2" style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+								<Card.Title className='five-day-card-title'>
+									{days[new Date(day.EpochDate * 1000).getDay()]}
+								</Card.Title>
+								<Card.Subtitle className="mb-2 five-day-card-subtitle">
 									{Math.round((day.Temperature.Minimum.Value + day.Temperature.Maximum.Value) / 2)}&deg;C
 								</Card.Subtitle>
 							</Card.Body>
 						</Card>
 					);
 				})}
-				<div style={{ zIndex: 1, position: 'fixed', top: 0, left: 0 }}>
+				<div className='error-msg'>
 					{fetchError}
 				</div>
 			</div>

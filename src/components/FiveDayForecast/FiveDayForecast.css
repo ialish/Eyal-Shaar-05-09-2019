@@ -1,0 +1,30 @@
+.five-day-cards {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin-top: 1rem;
+}
+
+.five-day-card {
+	width: 5rem;
+}
+
+.five-day-card-title {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.five-day-card-subtitle {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.error-msg {
+	z-index: 1;
+	position: fixed;
+	top: 0;
+	left: 0;
+}

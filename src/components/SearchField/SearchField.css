@@ -1,6 +1,5 @@
-.weather-text {
-	margin-top: 1rem;
-	text-align: center;
+.search-field {
+	width: 200px
 }
 
 .error-msg {
