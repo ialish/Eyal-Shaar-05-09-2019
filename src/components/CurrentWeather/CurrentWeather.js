@@ -2,7 +2,7 @@ import React from 'react';
 import './CurrentWeather.css';
 import HandleError from '../HandleError';
 
-const apiKey = 'sVHvQTA0yb2tOUAwEA6hrti883uUGrsA';
+const apiKey = process.env.REACT_APP_API_KEY;
 
 class CurrentWeather extends React.Component {
 	constructor(props) {
