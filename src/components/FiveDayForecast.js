@@ -48,10 +48,10 @@ class FiveDayForecast extends React.Component {
 			);
 		}
 		return (
-			<div style={{ display: 'flex', flexDirection: 'row', marginTop: '2rem' }}>
+			<div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', marginTop: '2rem' }}>
 				{this.state.DailyForecasts.map((day, index) => {
 					return (
-						<Card key={index} style={{ width: '18rem' }}>
+						<Card key={index} style={{ width: '5rem' }}>
 							<Card.Body>
 								<Card.Title style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{days[new Date(day.EpochDate * 1000).getDay()]}</Card.Title>
 								<Card.Subtitle className="mb-2" style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
