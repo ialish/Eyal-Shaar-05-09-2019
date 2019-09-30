@@ -4,6 +4,7 @@ import Navigation from '../components/Navigation/Navigation';
 import SearchField from '../components/SearchField/SearchField';
 import WeatherDetails from '../components/WeatherDetails/WeatherDetails';
 import Favorites from '../components/Favorites/Favorites';
+import HandleError from '../components/HandleError';
 
 const apiKey = process.env.REACT_APP_API_KEY;
 const defaultLocation = {
@@ -16,7 +17,8 @@ class App extends Component {
 		super();
 		this.state = {
 			route: 'home',
-			location: defaultLocation
+			location: defaultLocation,
+			fetchError: ''
 		};
 	}
 
@@ -56,6 +58,20 @@ class App extends Component {
 	}
 
 	render() {
+		let fetchError;
+		if (this.state.fetchError) {
+			fetchError = (
+				<HandleError
+					name={`Error: ${this.state.fetchError}!`}
+					description={`Failed to fetch data from the server.`}
+				/>
+			);
+			return (
+				<div className='error-msg'>
+					{fetchError}
+				</div>
+			);
+		}
 		return (
 			<div>
 				<Navigation
