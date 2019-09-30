@@ -5,6 +5,7 @@ import SearchField from '../components/SearchField/SearchField';
 import WeatherDetails from '../components/WeatherDetails/WeatherDetails';
 import Favorites from '../components/Favorites/Favorites';
 
+const apiKey = process.env.REACT_APP_API_KEY;
 const defaultLocation = {
 	key: '215854',
 	city: 'Tel Aviv'
@@ -18,6 +19,33 @@ class App extends Component {
 			location: defaultLocation
 		};
 	}
+
+	fetchForecast = (latitude, longitude) => {
+		const url = `https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${apiKey}&q=${latitude}%2C${longitude}`;
+		
+		fetch(url)
+			.then(resp => resp.json())
+			.then(json => this.setState(prevState => {
+				let location = { ...prevState.location };
+				location.key = json.Key;
+				location.city = json.LocalizedName;
+				return { location };
+			}))
+			.catch(err => this.setState({ fetchError: err.message }));
+	}
+	
+	getCoordinates = (position) => {
+		const latitude = position.coords.latitude;
+		const longitude = position.coords.longitude;
+		
+		this.fetchForecast(latitude, longitude);
+	}
+	
+	componentDidMount() {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(this.getCoordinates);
+			}
+		}
 
 	onRouteChange = (route) => {
 		this.setState({ route });
