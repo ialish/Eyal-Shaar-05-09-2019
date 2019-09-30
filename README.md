@@ -1,6 +1,6 @@
 ## Weather App
 
-This is a simple web app that shows the weather of some city.
+This is a web app that shows the weather of some city.
 
 The user can search for a city and save it to favorites (locally).
 
