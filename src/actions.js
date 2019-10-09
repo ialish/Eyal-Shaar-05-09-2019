@@ -1,4 +1,15 @@
-import { SET_LOCATION, REQUEST_CURRENT_POSITION } from './actionTypes'
+import {
+	SET_ROUTE,
+	SET_LOCATION,
+	REQUEST_CURRENT_POSITION
+} from './actionTypes'
+
+export const setRoute = (route) => {
+	return {
+		type: SET_ROUTE,
+		payload: route
+	}
+}
 
 export const setLocation = (location) => {
 	return {
@@ -17,17 +28,21 @@ export const requestCurrentPosition = () => {
 				const longitude = position.coords.longitude;
 				const url = `https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${apiKey}&q=${latitude}%2C${longitude}`;
 				return fetch(url)
-					.then((response) => response.json())
+					.then(
+						(response) => response.json(),
+						// It's not good to use catch because that will also catch any 
+						// errors in the dispatch and resulting render, causing a loop 
+						// of 'Unexpected batch number' errors.
+						(error) => dispatch({
+							type: REQUEST_CURRENT_POSITION.FAILED,
+							payload: error.message
+						}))
 					.then((data) => dispatch({
 						type: REQUEST_CURRENT_POSITION.SUCCESS,
 						payload: {
 							key: data.Key,
 							city: data.LocalizedName
 						}
-					}))
-					.catch((error) => dispatch({
-						type: REQUEST_CURRENT_POSITION.FAILED,
-						payload: error.message
 					}));
 			});
 		}

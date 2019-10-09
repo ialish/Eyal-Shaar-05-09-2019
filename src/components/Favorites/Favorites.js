@@ -38,11 +38,11 @@ class Favorites extends Component {
 	}
 
 	handleOnClick = (cityData) =>{
-		this.props.loadLocation({
+		this.props.onLocationChange({
 			key: cityData.location.key,
 			city: cityData.location.city
 		});
-		this.props.routeChange('home');
+		this.props.onRouteChange('home');
 	}
 
 	render() {

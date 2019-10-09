@@ -6,49 +6,40 @@ import SearchField from '../components/SearchField/SearchField';
 import WeatherDetails from '../components/WeatherDetails/WeatherDetails';
 import Favorites from '../components/Favorites/Favorites';
 import HandleError from '../components/HandleError';
-import { setLocation, requestCurrentPosition } from '../actions';
+import { setRoute, setLocation, requestCurrentPosition } from '../actions';
 
 import './App.css';
 
 const mapStateToProps = (state) => {
 	return {
-		isPending: state.isPending,
-		location: state.location,
-		error: state.error
+		route: state.changeRoute.route,
+		isPending: state.changeLocation.isPending,
+		location: state.changeLocation.location,
+		error: state.changeLocation.error
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		loadLocation: (location) => dispatch(setLocation(location)),
+		onRouteChange: (route) => dispatch(setRoute(route)),
+		onLocationChange: (location) => dispatch(setLocation(location)),
 		onRequestCurrentPosition: () => dispatch(requestCurrentPosition())
 	}
 }
 
 class App extends Component {
-	constructor() {
-		super();
-		this.state = {
-			route: 'home'
-		};
-	}
-	
 	componentDidMount() {
 		this.props.onRequestCurrentPosition();
-		}
-
-	onRouteChange = (route) => {
-		this.setState({ route });
 	}
 
 	render() {
-		const { location, loadLocation } = this.props;
+		const { route, onRouteChange, location, onLocationChange, error } = this.props;
 
 		let fetchError;
-		if (this.state.fetchError) {
+		if (error) {
 			fetchError = (
 				<HandleError
-					name={`Error: ${this.state.fetchError}!`}
+					name={`Error: ${error}!`}
 					description={`Failed to fetch data from the server.`}
 				/>
 			);
@@ -61,21 +52,21 @@ class App extends Component {
 		return (
 			<div>
 				<Navigation
-					routeChange={this.onRouteChange}
-					route={this.state.route}
+					onRouteChange={onRouteChange}
+					route={route}
 				/>
 				{
-					this.state.route === 'home' ?
+					route === 'home' ?
 						<div className="App">
 							<h1>Weather Forecast</h1>
-							<SearchField loadLocation={loadLocation} />
+							<SearchField onLocationChange={onLocationChange} />
 							<WeatherDetails location={location} />
 						</div>
 					: <div className="App">
 							<h1>My Favorites</h1>
 							<Favorites
-								loadLocation={loadLocation}
-								routeChange={this.onRouteChange}
+								onLocationChange={onLocationChange}
+								onRouteChange={onRouteChange}
 							/>
 						</div>
 				}

@@ -1,4 +1,21 @@
-import { SET_LOCATION, REQUEST_CURRENT_POSITION } from './actionTypes'
+import {
+	SET_ROUTE,
+	SET_LOCATION,
+	REQUEST_CURRENT_POSITION
+} from './actionTypes'
+
+const initialStateRoute = {
+	route: 'home'
+};
+
+export const changeRoute = (state = initialStateRoute, action) => {
+	switch(action.type) {
+		case SET_ROUTE:
+			return { ...state, ...{ route: action.payload } };
+		default:
+			return state;
+	}
+}
 
 const defaultLocation = {
 	key: '215854',

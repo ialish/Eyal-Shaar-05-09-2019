@@ -36,7 +36,7 @@ class SearchField extends React.Component {
 	}
 	
 	onChange = (selectedOptions) => {
-		this.props.loadLocation({
+		this.props.onLocationChange({
 			key: selectedOptions[0].Key,
 			city: selectedOptions[0].LocalizedName
 		});
