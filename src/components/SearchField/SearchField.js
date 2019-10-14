@@ -1,40 +1,31 @@
 import React from 'react';
-import './SearchField.css';
+import { connect } from 'react-redux';
+
 import { asyncContainer, Typeahead } from 'react-bootstrap-typeahead';
 import HandleError from '../HandleError';
+import { updateInput, requestSearchOptions } from '../../actions';
+
+import './SearchField.css';
 
 const AsyncTypeahead = asyncContainer(Typeahead);
-const apiKey = process.env.REACT_APP_API_KEY;
+
+const mapStateToProps = (state) => {
+	return {
+		query: state.changeInput.query,
+		isLoading: state.changeInput.isLoading,
+		options: state.changeInput.options,
+		error: state.changeInput.error
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onInputChange: (query) => dispatch(updateInput(query)),
+		onSearch: (query) => dispatch(requestSearchOptions(query))
+	}
+}
 
 class SearchField extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			isLoading: false,
-			options: [],
-			query: '',
-			fetchError: ''
-		}
-	}
-
-	onInputChange = (query) => {
-		this.setState({ query });
-	}
-
-	onSearch = (query) => {
-		this.setState({ isLoading: true });
-
-		const url = `https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${apiKey}&q=${query}`;
-
-		fetch(url)
-			.then(resp => resp.json())
-			.then(json => this.setState({
-				isLoading: false,
-				options: json
-			}))
-			.catch(err => this.setState({ fetchError: err.message }));
-	}
-	
 	onChange = (selectedOptions) => {
 		this.props.onLocationChange({
 			key: selectedOptions[0].Key,
@@ -49,19 +40,21 @@ class SearchField extends React.Component {
 	}
 
 	render() {
+		const { query, onInputChange, onSearch, isLoading, options, error } = this.props;
+
 		let fetchError;
-		if (this.state.fetchError) {
+		if (error) {
 			fetchError = (
 				<HandleError
-				name={`Error: ${this.state.fetchError}!`}
-				description={'Failed to fetch data from the server.'}
+					name={`Error: ${error}!`}
+					description={'Failed to fetch data from the server.'}
 				/>
 				);
 			}
 			
 		let mistype;
 		const availableChars = /^[0-9a-zA-Z]*$/;
-		if (!this.state.query.match(availableChars)) {
+		if (!query.match(availableChars)) {
 			mistype = (
 				<HandleError
 					name={'Error: Mistype!'}
@@ -76,11 +69,11 @@ class SearchField extends React.Component {
 					id="AsyncTypeahead"
 					ref="SubjectTypeahead"
 					placeholder="Enter location"
-					isLoading={this.state.isLoading}
+					isLoading={isLoading}
 					labelKey="LocalizedName"
-					onInputChange={this.onInputChange}
-					onSearch={this.onSearch}
-					options={this.state.options}
+					onInputChange={onInputChange}
+					onSearch={onSearch}
+					options={options}
 					onChange={this.onChange}
 				/>
 				<div className='error-msg'>
@@ -92,4 +85,4 @@ class SearchField extends React.Component {
 	}
 }
 
-export default SearchField;
+export default connect(mapStateToProps, mapDispatchToProps)(SearchField);

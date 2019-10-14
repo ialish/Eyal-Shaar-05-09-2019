@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
 import Navigation from '../components/Navigation/Navigation';
 import SearchField from '../components/SearchField/SearchField';

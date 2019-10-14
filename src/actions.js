@@ -1,8 +1,15 @@
 import {
 	SET_ROUTE,
 	SET_LOCATION,
-	REQUEST_CURRENT_POSITION
+	REQUEST_CURRENT_POSITION,
 } from './actionTypes'
+
+import {
+	UPDATE_INPUT,
+	REQUEST_SEARCH_OPTIONS
+} from './actionTypes'
+
+/* App component */
 
 export const setRoute = (route) => {
 	return {
@@ -46,5 +53,33 @@ export const requestCurrentPosition = () => {
 					}));
 			});
 		}
+	}
+}
+
+/* SearchField component */
+
+export const updateInput = (query) => {
+	return {
+		type: UPDATE_INPUT,
+		payload: query
+	}
+}
+
+export const requestSearchOptions = (query) => {
+	return (dispatch) => {
+		dispatch({ type: REQUEST_SEARCH_OPTIONS.PENDING });
+		const apiKey = process.env.REACT_APP_API_KEY;
+		const url = `https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${apiKey}&q=${query}`;
+		return fetch(url)
+			.then(
+				(response) => response.json(),
+				(error) => dispatch({
+					type: REQUEST_SEARCH_OPTIONS.FAILED,
+					payload: error.message
+				}))
+			.then((data) => dispatch({
+				type: REQUEST_SEARCH_OPTIONS.SUCCESS,
+				payload: data
+			}));
 	}
 }
