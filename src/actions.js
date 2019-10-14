@@ -1,12 +1,16 @@
 import {
 	SET_ROUTE,
 	SET_LOCATION,
-	REQUEST_CURRENT_POSITION,
+	REQUEST_CURRENT_POSITION_PENDING,
+	REQUEST_CURRENT_POSITION_SUCCESS,
+	REQUEST_CURRENT_POSITION_FAILED
 } from './actionTypes'
 
 import {
 	UPDATE_INPUT,
-	REQUEST_SEARCH_OPTIONS
+	REQUEST_SEARCH_OPTIONS_PENDING,
+	REQUEST_SEARCH_OPTIONS_SUCCESS,
+	REQUEST_SEARCH_OPTIONS_FAILED
 } from './actionTypes'
 
 /* App component */
@@ -27,7 +31,7 @@ export const setLocation = (location) => {
 
 export const requestCurrentPosition = () => {
 	return (dispatch) => {
-		dispatch({ type: REQUEST_CURRENT_POSITION.PENDING });
+		dispatch({ type: REQUEST_CURRENT_POSITION_PENDING });
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition((position) => {
 				const apiKey = process.env.REACT_APP_API_KEY;
@@ -41,11 +45,11 @@ export const requestCurrentPosition = () => {
 						// errors in the dispatch and resulting render, causing a loop 
 						// of 'Unexpected batch number' errors.
 						(error) => dispatch({
-							type: REQUEST_CURRENT_POSITION.FAILED,
+							type: REQUEST_CURRENT_POSITION_FAILED,
 							payload: error.message
 						}))
 					.then((data) => dispatch({
-						type: REQUEST_CURRENT_POSITION.SUCCESS,
+						type: REQUEST_CURRENT_POSITION_SUCCESS,
 						payload: {
 							key: data.Key,
 							city: data.LocalizedName
@@ -67,18 +71,18 @@ export const updateInput = (query) => {
 
 export const requestSearchOptions = (query) => {
 	return (dispatch) => {
-		dispatch({ type: REQUEST_SEARCH_OPTIONS.PENDING });
+		dispatch({ type: REQUEST_SEARCH_OPTIONS_PENDING });
 		const apiKey = process.env.REACT_APP_API_KEY;
 		const url = `https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${apiKey}&q=${query}`;
 		return fetch(url)
 			.then(
 				(response) => response.json(),
 				(error) => dispatch({
-					type: REQUEST_SEARCH_OPTIONS.FAILED,
+					type: REQUEST_SEARCH_OPTIONS_FAILED,
 					payload: error.message
 				}))
 			.then((data) => dispatch({
-				type: REQUEST_SEARCH_OPTIONS.SUCCESS,
+				type: REQUEST_SEARCH_OPTIONS_SUCCESS,
 				payload: data
 			}));
 	}

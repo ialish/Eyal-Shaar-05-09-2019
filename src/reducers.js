@@ -1,12 +1,16 @@
 import {
 	SET_ROUTE,
 	SET_LOCATION,
-	REQUEST_CURRENT_POSITION
+	REQUEST_CURRENT_POSITION_PENDING,
+	REQUEST_CURRENT_POSITION_SUCCESS,
+	REQUEST_CURRENT_POSITION_FAILED
 } from './actionTypes'
 
 import {
 	UPDATE_INPUT,
-	REQUEST_SEARCH_OPTIONS
+	REQUEST_SEARCH_OPTIONS_PENDING,
+	REQUEST_SEARCH_OPTIONS_SUCCESS,
+	REQUEST_SEARCH_OPTIONS_FAILED
 } from './actionTypes'
 
 /* App component */
@@ -39,11 +43,11 @@ export const changeLocation = (state = initialStateLocation, action) => {
 	switch (action.type) {
 		case SET_LOCATION:
 			return { ...state, ...{ location: action.payload } };
-		case REQUEST_CURRENT_POSITION.PENDING:
+		case REQUEST_CURRENT_POSITION_PENDING:
 			return { ...state, ...{ isPending: true } };
-		case REQUEST_CURRENT_POSITION.SUCCESS:
+		case REQUEST_CURRENT_POSITION_SUCCESS:
 			return { ...state, ...{ location: action.payload, isPending: false } };
-		case REQUEST_CURRENT_POSITION.FAILED:
+		case REQUEST_CURRENT_POSITION_FAILED:
 			return { ...state, ...{ error: action.payload, isPending: false } };
 		default:
 			return state;
@@ -63,11 +67,11 @@ export const changeInput = (state = initialStateInput, action) => {
 	switch (action.type) {
 		case UPDATE_INPUT:
 			return { ...state, ...{ query: action.payload } };
-		case REQUEST_SEARCH_OPTIONS.PENDING:
+		case REQUEST_SEARCH_OPTIONS_PENDING:
 			return { ...state, ...{ isLoading: true } };
-		case REQUEST_SEARCH_OPTIONS.SUCCESS:
+		case REQUEST_SEARCH_OPTIONS_SUCCESS:
 			return { ...state, ...{ options: action.payload, isLoading: false } };
-		case REQUEST_SEARCH_OPTIONS.FAILED:
+		case REQUEST_SEARCH_OPTIONS_FAILED:
 			return { ...state, ...{ error: action.payload, isLoading: false } };
 		default:
 			return state;
