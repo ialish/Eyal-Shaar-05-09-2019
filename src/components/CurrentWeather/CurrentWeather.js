@@ -8,16 +8,15 @@ import './CurrentWeather.css';
 
 const mapStateToProps = (state) => {
 	return {
-		location: state.changeLocation.location,
 		isPending: state.changeCurrentWeather.isPending,
 		currentWeatherData: state.changeCurrentWeather.currentWeatherData,
 		error: state.changeCurrentWeather.error
 	}
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
 	return {
-		onRequestCurrentWeather: () => dispatch(requestCurrentWeather())
+		onRequestCurrentWeather: () => dispatch(requestCurrentWeather(ownProps.location))
 	}
 }
 

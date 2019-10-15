@@ -10,7 +10,7 @@ const WeatherDetails = ({ location }) => {
 		<div>
 			<Alert className='background-box' variant={'success'}>
 				<FavoritesButton location={location} />
-				<CurrentWeather />
+				<CurrentWeather location={location} />
 				<FiveDayForecast location={location} />
 			</Alert>
 		</div>
