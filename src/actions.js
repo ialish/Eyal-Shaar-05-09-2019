@@ -1,17 +1,19 @@
+/* App component */
 import {
 	SET_ROUTE,
 	SET_LOCATION,
 	REQUEST_CURRENT_POSITION_PENDING,
 	REQUEST_CURRENT_POSITION_SUCCESS,
 	REQUEST_CURRENT_POSITION_FAILED
-} from './actionTypes'
+} from './actionTypes';
 
+/* SearchField component */
 import {
 	UPDATE_INPUT,
 	REQUEST_SEARCH_OPTIONS_PENDING,
 	REQUEST_SEARCH_OPTIONS_SUCCESS,
 	REQUEST_SEARCH_OPTIONS_FAILED
-} from './actionTypes'
+} from './actionTypes';
 
 /* App component */
 
