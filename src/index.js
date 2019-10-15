@@ -8,13 +8,19 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk'
 import { createLogger } from 'redux-logger'
-import { changeRoute, changeLocation, changeInput } from './reducers';
+import {
+	changeRoute,
+	changeLocation,
+	changeInput,
+	changeCurrentWeather
+} from './reducers';
 
 const logger = createLogger();
 const rootReducer = combineReducers({
 	changeRoute,
 	changeLocation,
-	changeInput
+	changeInput,
+	changeCurrentWeather
 });
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));
 

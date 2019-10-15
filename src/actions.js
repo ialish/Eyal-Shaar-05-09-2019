@@ -15,6 +15,15 @@ import {
 	REQUEST_SEARCH_OPTIONS_FAILED
 } from './actionTypes';
 
+/* CurrentWeather component */
+import {
+	REQUEST_CURRENT_WEATHER_PENDING,
+	REQUEST_CURRENT_WEATHER_SUCCESS,
+	REQUEST_CURRENT_WEATHER_FAILED
+} from './actionTypes';
+
+const apiKey = process.env.REACT_APP_API_KEY;
+
 /* App component */
 
 export const setRoute = (route) => {
@@ -36,7 +45,6 @@ export const requestCurrentPosition = () => {
 		dispatch({ type: REQUEST_CURRENT_POSITION_PENDING });
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition((position) => {
-				const apiKey = process.env.REACT_APP_API_KEY;
 				const latitude = position.coords.latitude;
 				const longitude = position.coords.longitude;
 				const url = `https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${apiKey}&q=${latitude}%2C${longitude}`;
@@ -74,7 +82,6 @@ export const updateInput = (query) => {
 export const requestSearchOptions = (query) => {
 	return (dispatch) => {
 		dispatch({ type: REQUEST_SEARCH_OPTIONS_PENDING });
-		const apiKey = process.env.REACT_APP_API_KEY;
 		const url = `https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${apiKey}&q=${query}`;
 		return fetch(url)
 			.then(
@@ -86,6 +93,30 @@ export const requestSearchOptions = (query) => {
 			.then((data) => dispatch({
 				type: REQUEST_SEARCH_OPTIONS_SUCCESS,
 				payload: data
+			}));
+	}
+}
+
+/* CurrentWeather component */
+
+export const requestCurrentWeather = (location) => {
+	return (dispatch) => {
+		dispatch({ type: REQUEST_CURRENT_WEATHER_PENDING });
+		const url = `https://dataservice.accuweather.com/currentconditions/v1/${location.key}?apikey=${apiKey}`;
+		return fetch(url)
+			.then(
+				(response) => response.json(),
+				(error) => dispatch({
+					type: REQUEST_CURRENT_WEATHER_FAILED,
+					payload: error.message
+				}))
+			.then((data) => dispatch({
+				type: REQUEST_CURRENT_WEATHER_SUCCESS,
+				payload: {
+					city: location.city,
+					degreesC: data[0].Temperature.Metric.Value,
+					weatherText: data[0].WeatherText
+				}
 			}));
 	}
 }

@@ -1,3 +1,4 @@
+/* App component */
 import {
 	SET_ROUTE,
 	SET_LOCATION,
@@ -12,6 +13,13 @@ import {
 	REQUEST_SEARCH_OPTIONS_PENDING,
 	REQUEST_SEARCH_OPTIONS_SUCCESS,
 	REQUEST_SEARCH_OPTIONS_FAILED
+} from './actionTypes';
+
+/* CurrentWeather component */
+import {
+	REQUEST_CURRENT_WEATHER_PENDING,
+	REQUEST_CURRENT_WEATHER_SUCCESS,
+	REQUEST_CURRENT_WEATHER_FAILED
 } from './actionTypes';
 
 /* App component */
@@ -74,6 +82,31 @@ export const changeInput = (state = initialStateInput, action) => {
 			return { ...state, ...{ options: action.payload, isLoading: false } };
 		case REQUEST_SEARCH_OPTIONS_FAILED:
 			return { ...state, ...{ error: action.payload, isLoading: false } };
+		default:
+			return state;
+	}
+}
+
+/* CurrentWeather component */
+
+const initialStateCurrentWeather = {
+	isPending: false,
+	currentWeatherData: {
+		city: '',
+		degreesC: null,
+		weatherText: ''
+	},
+	error: ''
+};
+
+export const changeCurrentWeather = (state = initialStateCurrentWeather, action) => {
+	switch (action.type) {
+		case REQUEST_CURRENT_WEATHER_PENDING:
+			return { ...state, ...{ isPending: true } };
+		case REQUEST_CURRENT_WEATHER_SUCCESS:
+			return { ...state, ...{ currentWeatherData: action.payload, isPending: false } };
+		case REQUEST_CURRENT_WEATHER_FAILED:
+			return { ...state, ...{ error: action.payload, isPending: false } };
 		default:
 			return state;
 	}

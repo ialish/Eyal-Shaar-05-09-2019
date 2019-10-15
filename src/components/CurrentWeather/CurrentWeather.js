@@ -1,59 +1,55 @@
 import React from 'react';
-import './CurrentWeather.css';
-import HandleError from '../HandleError';
+import { connect } from 'react-redux';
 
-const apiKey = process.env.REACT_APP_API_KEY;
+import HandleError from '../HandleError';
+import { requestCurrentWeather } from '../../actions';
+
+import './CurrentWeather.css';
+
+const mapStateToProps = (state) => {
+	return {
+		location: state.changeLocation.location,
+		isPending: state.changeCurrentWeather.isPending,
+		currentWeatherData: state.changeCurrentWeather.currentWeatherData,
+		error: state.changeCurrentWeather.error
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onRequestCurrentWeather: () => dispatch(requestCurrentWeather())
+	}
+}
 
 class CurrentWeather extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			city: '',
-			degreesC: null,
-			weatherText: '',
-			fetchError: ''
-		}
-	}
-
-	fetchForecast = () => {
-		const url = `https://dataservice.accuweather.com/currentconditions/v1/${this.props.location.key}?apikey=${apiKey}`;
-
-		fetch(url)
-			.then(resp => resp.json())
-			.then(json => this.setState({
-				city: this.props.location.city,
-				degreesC: json[0].Temperature.Metric.Value,
-				weatherText: json[0].WeatherText
-			}))
-			.catch(err => this.setState({ fetchError: err.message }));
-	}
-
 	componentDidMount() {
-		this.fetchForecast();
+		this.props.onRequestCurrentWeather();
 	}
 	
 	componentDidUpdate(prevProps) {
 		const prevLocation = prevProps.location || {};
 		if (prevLocation.key !== this.props.location.key) {
-			this.fetchForecast();
+			this.props.onRequestCurrentWeather();
 		}
 	}
-
+	
 	render() {
+		const { currentWeatherData, error } = this.props;
+
 		let fetchError;
-		if (this.state.fetchError) {
+		if (error) {
 			fetchError = (
 				<HandleError
-					name={`Error: ${this.state.fetchError}!`}
+					name={`Error: ${error}!`}
 					description={'Failed to fetch data from the server.'}
 				/>
 			);
 		}
 		return (
 			<div>
-				<h5 className='city'>{this.state.city}</h5>
-				<h6>{Math.round(this.state.degreesC)}&deg;C</h6>
-				<h2 className='weather-text'>{this.state.weatherText}</h2>
+				<h5 className='city'>{currentWeatherData.city}</h5>
+				<h6>{Math.round(currentWeatherData.degreesC)}&deg;C</h6>
+				<h2 className='weather-text'>{currentWeatherData.weatherText}</h2>
 				<div className='error-msg'>
 					{fetchError}
 				</div>
@@ -62,4 +58,4 @@ class CurrentWeather extends React.Component {
 	}
 }
 
-export default CurrentWeather;
+export default connect(mapStateToProps, mapDispatchToProps)(CurrentWeather);
