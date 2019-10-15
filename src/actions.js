@@ -22,6 +22,13 @@ import {
 	REQUEST_CURRENT_WEATHER_FAILED
 } from './actionTypes';
 
+/* FiveDayForecast component */
+import {
+	REQUEST_FIVE_DAY_FORECAST_PENDING,
+	REQUEST_FIVE_DAY_FORECAST_SUCCESS,
+	REQUEST_FIVE_DAY_FORECAST_FAILED
+} from './actionTypes';
+
 const apiKey = process.env.REACT_APP_API_KEY;
 
 /* App component */
@@ -117,6 +124,26 @@ export const requestCurrentWeather = (location) => {
 					degreesC: data[0].Temperature.Metric.Value,
 					weatherText: data[0].WeatherText
 				}
+			}));
+	}
+}
+
+/* FiveDayForecast component */
+
+export const requestFiveDayForecast = (location) => {
+	return (dispatch) => {
+		dispatch({ type: REQUEST_FIVE_DAY_FORECAST_PENDING });
+		const url = `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${location.key}?apikey=${apiKey}&metric=true`;
+		return fetch(url)
+			.then(
+				(response) => response.json(),
+				(error) => dispatch({
+					type: REQUEST_FIVE_DAY_FORECAST_FAILED,
+					payload: error.message
+				}))
+			.then((data) => dispatch({
+				type: REQUEST_FIVE_DAY_FORECAST_SUCCESS,
+				payload: data.DailyForecasts
 			}));
 	}
 }

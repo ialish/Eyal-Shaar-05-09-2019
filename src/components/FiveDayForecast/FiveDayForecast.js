@@ -1,56 +1,54 @@
 import React from 'react';
-import './FiveDayForecast.css';
+import { connect } from 'react-redux';
+
 import { Card } from 'react-bootstrap';
 import HandleError from '../HandleError';
+import { requestFiveDayForecast } from '../../actions';
 
-const apiKey = process.env.REACT_APP_API_KEY;
+import './FiveDayForecast.css';
+
+const mapStateToProps = (state) => {
+	return {
+		isPending: state.changeFiveDayForecast.isPending,
+		DailyForecasts: state.changeFiveDayForecast.DailyForecasts,
+		error: state.changeFiveDayForecast.error
+	}
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+	return {
+		onRequestFiveDayForecast: () => dispatch(requestFiveDayForecast(ownProps.location))
+	}
+}
 
 class FiveDayForecast extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			DailyForecasts: [],
-			fetchError: ''
-		}
-	}
-
-	fetchForecast = () => {
-		const url = `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${this.props.location.key}?apikey=${apiKey}&metric=true`;
-
-		fetch(url)
-			.then(resp => resp.json())
-			.then(json => this.setState({
-				DailyForecasts: json.DailyForecasts
-			}))
-			.catch(err => this.setState({ fetchError: err.message }));
-	}
-
 	componentDidMount() {
-		this.fetchForecast();
+		this.props.onRequestFiveDayForecast();
 	}
 
 	componentDidUpdate(prevProps) {
 		const prevLocation = prevProps.location || {};
 		if (prevLocation.key !== this.props.location.key) {
-			this.fetchForecast();
+			this.props.onRequestFiveDayForecast();
 		}
 	}
 
 	render() {
+		const { DailyForecasts, error } = this.props;
 		const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+		
 		let fetchError;
-
-		if (this.state.fetchError) {
+		if (error) {
 			fetchError = (
 				<HandleError
-					name={`Error: ${this.state.fetchError}!`}
+					name={`Error: ${error}!`}
 					description={'Failed to fetch data from the server.'}
 				/>
 			);
 		}
 		return (
 			<div className='five-day-cards'>
-				{this.state.DailyForecasts.map((day, index) => {
+				{DailyForecasts.map((day, index) => {
 					return (
 						<Card className='five-day-card' key={index}>
 							<Card.Body>
@@ -72,4 +70,4 @@ class FiveDayForecast extends React.Component {
 	}
 }
 
-export default FiveDayForecast;
+export default connect(mapStateToProps, mapDispatchToProps)(FiveDayForecast);

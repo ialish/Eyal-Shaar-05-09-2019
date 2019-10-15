@@ -22,6 +22,13 @@ import {
 	REQUEST_CURRENT_WEATHER_FAILED
 } from './actionTypes';
 
+/* FiveDayForecast component */
+import {
+	REQUEST_FIVE_DAY_FORECAST_PENDING,
+	REQUEST_FIVE_DAY_FORECAST_SUCCESS,
+	REQUEST_FIVE_DAY_FORECAST_FAILED
+} from './actionTypes';
+
 /* App component */
 
 const initialStateRoute = {
@@ -106,6 +113,27 @@ export const changeCurrentWeather = (state = initialStateCurrentWeather, action)
 		case REQUEST_CURRENT_WEATHER_SUCCESS:
 			return { ...state, ...{ currentWeatherData: action.payload, isPending: false } };
 		case REQUEST_CURRENT_WEATHER_FAILED:
+			return { ...state, ...{ error: action.payload, isPending: false } };
+		default:
+			return state;
+	}
+}
+
+/* FiveDayForecast component */
+
+const initialStateFiveDayForecast = {
+	isPending: false,
+	DailyForecasts: [],
+	error: ''
+};
+
+export const changeFiveDayForecast = (state = initialStateFiveDayForecast, action) => {
+	switch (action.type) {
+		case REQUEST_FIVE_DAY_FORECAST_PENDING:
+			return { ...state, ...{ isPending: true } };
+		case REQUEST_FIVE_DAY_FORECAST_SUCCESS:
+			return { ...state, ...{ DailyForecasts: action.payload, isPending: false } };
+		case REQUEST_FIVE_DAY_FORECAST_FAILED:
 			return { ...state, ...{ error: action.payload, isPending: false } };
 		default:
 			return state;
