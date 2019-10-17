@@ -158,7 +158,7 @@ export const requestFiveDayForecast = (location) => {
 /* Favorites component */
 
 export const requestFavoritesCurrentConditions = (favCities) => {
-	favCities.forEach((location) => {
+	favCities.map((location) => {
 		return (dispatch) => {
 			dispatch({ type: REQUEST_FAVORITES_CURRENT_CONDITIONS_PENDING });
 			const url = `https://dataservice.accuweather.com/currentconditions/v1/${location.key}?apikey=${apiKey}`;
