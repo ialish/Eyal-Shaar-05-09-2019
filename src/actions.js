@@ -170,14 +170,12 @@ export const requestFavoritesCurrentConditions = (favCities) => {
 						payload: error.message
 					}))
 				.then((data) => {
-					let degreesC = data[0].Temperature.Metric.Value;
-					let weatherText = data[0].WeatherText;
 					dispatch({
 						type: REQUEST_FAVORITES_CURRENT_CONDITIONS_SUCCESS,
 						payload: {
-							location,
-							degreesC,
-							weatherText
+							city: location.city,
+							degreesC: data[0].Temperature.Metric.Value,
+							weatherText: data[0].WeatherText
 						}
 					})
 				});

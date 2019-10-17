@@ -9,9 +9,9 @@ import './Favorites.css';
 
 const mapStateToProps = (state) => {
 	return {
-		isPending: state.changeFavorites.isPending,
-		favCitiesData: state.changeFavorites.favCitiesData,
-		error: state.changeFavorites.error
+		isPending: state.updateFavorites.isPending,
+		favCitiesData: state.updateFavorites.favCitiesData,
+		error: state.updateFavorites.error
 	}
 }
 
