@@ -29,6 +29,13 @@ import {
 	REQUEST_FIVE_DAY_FORECAST_FAILED
 } from './actionTypes';
 
+/* Favorites component */
+import {
+	REQUEST_FAVORITES_CURRENT_CONDITIONS_PENDING,
+	REQUEST_FAVORITES_CURRENT_CONDITIONS_SUCCESS,
+	REQUEST_FAVORITES_CURRENT_CONDITIONS_FAILED
+} from './actionTypes';
+
 const apiKey = process.env.REACT_APP_API_KEY;
 
 /* App component */
@@ -146,4 +153,34 @@ export const requestFiveDayForecast = (location) => {
 				payload: data.DailyForecasts
 			}));
 	}
+}
+
+/* Favorites component */
+
+export const requestFavoritesCurrentConditions = (favCities) => {
+	favCities.forEach((location) => {
+		return (dispatch) => {
+			dispatch({ type: REQUEST_FAVORITES_CURRENT_CONDITIONS_PENDING });
+			const url = `https://dataservice.accuweather.com/currentconditions/v1/${location.key}?apikey=${apiKey}`;
+			return fetch(url)
+				.then(
+					(response) => response.json(),
+					(error) => dispatch({
+						type: REQUEST_FAVORITES_CURRENT_CONDITIONS_FAILED,
+						payload: error.message
+					}))
+				.then((data) => {
+					let degreesC = data[0].Temperature.Metric.Value;
+					let weatherText = data[0].WeatherText;
+					dispatch({
+						type: REQUEST_FAVORITES_CURRENT_CONDITIONS_SUCCESS,
+						payload: {
+							location,
+							degreesC,
+							weatherText
+						}
+					})
+				});
+			}
+	});
 }

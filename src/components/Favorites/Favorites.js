@@ -1,39 +1,31 @@
 import React, { Component } from 'react';
-import './Favorites.css';
+import { connect } from 'react-redux';
+
 import { Card } from 'react-bootstrap';
 import HandleError from '../HandleError';
+import { requestFavoritesCurrentConditions } from '../../actions';
 
-const apiKey = process.env.REACT_APP_API_KEY;
+import './Favorites.css';
+
+const mapStateToProps = (state) => {
+	return {
+		isPending: state.changeFavorites.isPending,
+		favCitiesData: state.changeFavorites.favCitiesData,
+		error: state.changeFavorites.error
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onRequestFavoritesCurrentConditions: (favCities) => dispatch(requestFavoritesCurrentConditions(favCities))
+	}
+}
 
 class Favorites extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			favCitiesData: [],
-			fetchError: ''
-		};
-	}
-	
-	fetchData = (favCities) => {
-		let favCitiesData = [];
-		favCities.forEach((location) => {
-			const url = `https://dataservice.accuweather.com/currentconditions/v1/${location.key}?apikey=${apiKey}`;
-			fetch(url)
-				.then(resp => resp.json())
-				.then(json => {
-					let degreesC = Math.round(json[0].Temperature.Metric.Value);
-					let weatherText = json[0].WeatherText;
-					favCitiesData.push({ location, degreesC, weatherText });
-					this.setState({ favCitiesData });
-				})
-				.catch(err => this.setState({ fetchError: err.message }));
-		});
-	}
-
 	componentDidMount() {
 		let favCities = JSON.parse(localStorage.getItem('Favorite Cities'));
 		if (favCities) {
-			this.fetchData(favCities);
+			this.props.onRequestFavoritesCurrentConditions(favCities);
 		}
 	}
 
@@ -46,11 +38,13 @@ class Favorites extends Component {
 	}
 
 	render() {
+		const { favCitiesData, error } = this.props;
+
 		let fetchError;
-		if (this.state.fetchError) {
+		if (error) {
 			fetchError = (
 				<HandleError
-					name={`Error: ${this.state.fetchError}!`}
+					name={`Error: ${error}!`}
 					description={`Failed to fetch data from the server.`}
 				/>
 			);
@@ -61,11 +55,11 @@ class Favorites extends Component {
 			);
 		}
 
-		if (!this.state.favCitiesData.length) {
+		if (!favCitiesData.length) {
 			return null;
 		}
 
-		let cards = this.state.favCitiesData.map((cityData) => (
+		let cards = favCitiesData.map((cityData) => (
 			<Card className='favorites-card' key={cityData.location.key}>
 				<Card.Body>
 					<Card.Title
@@ -75,7 +69,7 @@ class Favorites extends Component {
 						{cityData.location.city}
 					</Card.Title>
 					<Card.Subtitle className="mb-2 favorites-card-subtitle">
-						<h3>{cityData.degreesC}&deg;C</h3>
+						<h3>{Math.round(cityData.degreesC)}&deg;C</h3>
 						<h6>{cityData.weatherText}</h6>
 					</Card.Subtitle>
 				</Card.Body>
@@ -90,4 +84,4 @@ class Favorites extends Component {
 	}
 }
 
-export default Favorites;
+export default connect(mapStateToProps, mapDispatchToProps)(Favorites);

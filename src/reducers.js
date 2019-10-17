@@ -29,6 +29,13 @@ import {
 	REQUEST_FIVE_DAY_FORECAST_FAILED
 } from './actionTypes';
 
+/* Favorites component */
+import {
+	REQUEST_FAVORITES_CURRENT_CONDITIONS_PENDING,
+	REQUEST_FAVORITES_CURRENT_CONDITIONS_SUCCESS,
+	REQUEST_FAVORITES_CURRENT_CONDITIONS_FAILED
+} from './actionTypes';
+
 /* App component */
 
 const initialStateRoute = {
@@ -134,6 +141,27 @@ export const changeFiveDayForecast = (state = initialStateFiveDayForecast, actio
 		case REQUEST_FIVE_DAY_FORECAST_SUCCESS:
 			return { ...state, ...{ DailyForecasts: action.payload, isPending: false } };
 		case REQUEST_FIVE_DAY_FORECAST_FAILED:
+			return { ...state, ...{ error: action.payload, isPending: false } };
+		default:
+			return state;
+	}
+}
+
+/* Favorites component */
+
+const initialStateFavorites = {
+	isPending: false,
+	favCitiesData: [],
+	error: ''
+};
+
+export const updateFavorites = (state = initialStateFavorites, action) => {
+	switch (action.type) {
+		case REQUEST_FAVORITES_CURRENT_CONDITIONS_PENDING:
+			return { ...state, ...{ isPending: true } };
+		case REQUEST_FAVORITES_CURRENT_CONDITIONS_SUCCESS:
+			return { ...state, ...{ favCitiesData: action.payload, isPending: false } };
+		case REQUEST_FAVORITES_CURRENT_CONDITIONS_FAILED:
 			return { ...state, ...{ error: action.payload, isPending: false } };
 		default:
 			return state;

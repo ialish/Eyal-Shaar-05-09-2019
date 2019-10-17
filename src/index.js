@@ -13,7 +13,8 @@ import {
 	changeLocation,
 	changeInput,
 	changeCurrentWeather,
-	changeFiveDayForecast
+	changeFiveDayForecast,
+	updateFavorites
 } from './reducers';
 
 const logger = createLogger();
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
 	changeLocation,
 	changeInput,
 	changeCurrentWeather,
-	changeFiveDayForecast
+	changeFiveDayForecast,
+	updateFavorites
 });
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));
 
