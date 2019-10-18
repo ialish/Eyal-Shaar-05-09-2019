@@ -69,7 +69,7 @@ class Favorites extends Component {
 						{cityData.location.city}
 					</Card.Title>
 					<Card.Subtitle className="mb-2 favorites-card-subtitle">
-						<h3>{Math.round(cityData.degreesC)}&deg;C</h3>
+						<h3>{cityData.degreesC}&deg;C</h3>
 						<h6>{cityData.weatherText}</h6>
 					</Card.Subtitle>
 				</Card.Body>

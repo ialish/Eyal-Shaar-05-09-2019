@@ -174,7 +174,7 @@ export const requestFavoritesCurrentConditions = (favCities) => {
 						type: REQUEST_FAVORITES_CURRENT_CONDITIONS_SUCCESS,
 						payload: {
 							location,
-							degreesC: data[0].Temperature.Metric.Value,
+							degreesC: Math.round(data[0].Temperature.Metric.Value),
 							weatherText: data[0].WeatherText
 						}
 					})
