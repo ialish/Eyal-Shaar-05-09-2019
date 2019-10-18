@@ -173,7 +173,7 @@ export const requestFavoritesCurrentConditions = (favCities) => {
 					dispatch({
 						type: REQUEST_FAVORITES_CURRENT_CONDITIONS_SUCCESS,
 						payload: {
-							city: location.city,
+							location,
 							degreesC: data[0].Temperature.Metric.Value,
 							weatherText: data[0].WeatherText
 						}
