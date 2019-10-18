@@ -156,11 +156,13 @@ const initialStateFavorites = {
 };
 
 export const updateFavorites = (state = initialStateFavorites, action) => {
+	console.log('favCitiesData1:', state.favCitiesData);
+
 	switch (action.type) {
 		case REQUEST_FAVORITES_CURRENT_CONDITIONS_PENDING:
 			return { ...state, ...{ isPending: true } };
 		case REQUEST_FAVORITES_CURRENT_CONDITIONS_SUCCESS:
-			return { ...state, ...{ favCitiesData: action.payload, isPending: false } };
+			return { ...state,  favCitiesData: [...state.favCitiesData, { ...action.payload }], isPending: false  };
 		case REQUEST_FAVORITES_CURRENT_CONDITIONS_FAILED:
 			return { ...state, ...{ error: action.payload, isPending: false } };
 		default:
