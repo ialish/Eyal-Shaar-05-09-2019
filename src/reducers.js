@@ -156,8 +156,6 @@ const initialStateFavorites = {
 };
 
 export const updateFavorites = (state = initialStateFavorites, action) => {
-	console.log('favCitiesData1:', state.favCitiesData);
-
 	switch (action.type) {
 		case REQUEST_FAVORITES_CURRENT_CONDITIONS_PENDING:
 			return { ...state, ...{ isPending: true } };

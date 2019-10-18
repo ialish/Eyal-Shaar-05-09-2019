@@ -39,8 +39,7 @@ class Favorites extends Component {
 
 	render() {
 		const { favCitiesData, error } = this.props;
-		console.log('favCitiesData2:', favCitiesData, favCitiesData.length);
-
+		
 		let fetchError;
 		if (error) {
 			fetchError = (
