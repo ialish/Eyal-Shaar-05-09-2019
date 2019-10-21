@@ -12,6 +12,7 @@ import {
 	changeRoute,
 	changeLocation,
 	changeInput,
+	toggleFavorite,
 	changeCurrentWeather,
 	changeFiveDayForecast,
 	updateFavorites
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
 	changeRoute,
 	changeLocation,
 	changeInput,
+	toggleFavorite,
 	changeCurrentWeather,
 	changeFiveDayForecast,
 	updateFavorites
