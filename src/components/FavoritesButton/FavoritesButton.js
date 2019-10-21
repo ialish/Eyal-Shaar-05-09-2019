@@ -1,48 +1,76 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-
-import { Button } from 'react-bootstrap';
-import { setHeart, addRemoveCity } from '../../actions';
-
 import './FavoritesButton.css';
-
-const mapStateToProps = (state) => {
-	return {
-		favCities: state.toggleFavorite.favCities,
-		heartImage: state.toggleFavorite.heartImage
-	}
-}
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-	return {
-		handleHeartImage: (favCities) => dispatch(setHeart(favCities, ownProps.location, ownProps.heartImage)),
-		onAddRemoveCity: (favCities) => (dispatch(addRemoveCity(favCities, ownProps.location, ownProps.heartImage)))
-	}
-}
+import HeartHollow from './HeartHollow.svg';
+import HeartFull from './HeartFull.svg';
+import { Button } from 'react-bootstrap';
 
 class FavoritesButton extends Component {
+	constructor() {
+		super();
+		this.state = {
+			favCities: [],
+			heartImage: HeartHollow
+		};
+	}
+
+	handleHeartImage = () => {
+		if (this.state.favCities) {
+			if (this.state.favCities.find(element =>
+				element.key === this.props.location.key)) {
+				if (this.state.heartImage === HeartHollow)
+					this.setState({ heartImage: HeartFull });
+			} else {
+				if (this.state.heartImage === HeartFull)
+					this.setState({ heartImage: HeartHollow });
+			}
+		}
+	}
+
 	componentDidMount() {
-		let favCities = JSON.parse(localStorage.getItem('Favorite Cities'));
-		this.props.handleHeartImage(favCities);
+		this.setState({ favCities: JSON.parse(localStorage.getItem('Favorite Cities')) });
+		this.handleHeartImage();
 	}
 
 	componentDidUpdate() {
-		this.props.handleHeartImage(this.props.favCities);
-		localStorage.setItem('Favorite Cities', JSON.stringify(this.props.favCities));
+		this.handleHeartImage();
+		localStorage.setItem('Favorite Cities', JSON.stringify(this.state.favCities));
+	}
+
+	addRemoveCity = () => {
+		let array;
+
+		if (this.state.favCities) {
+			array = [...this.state.favCities];
+		} else {
+			array = [];
+		}
+		
+		if (this.state.heartImage === HeartHollow) {
+			array.push(this.props.location);
+			this.setState({
+				heartImage: HeartFull,
+				favCities: array
+			})
+		} else {
+			const index = array.findIndex(element =>
+				element.key === this.props.location.key);
+				
+			array.splice(index, 1);
+			this.setState({
+				heartImage: HeartHollow,
+				favCities: array
+			})
+		}
 	}
 
 	render() {
-		const { heartImage, favCities, onAddRemoveCity } = this.props;
-
 		return (
 			<div className='favorites-button'>
-				<img src={heartImage} alt='Heart' width='35px'></img>
-				<Button variant="outline-danger" size="sm" onClick={() => onAddRemoveCity(favCities)}>
-					Add to Favorites
-				</Button>
+				<img src={this.state.heartImage} alt='Heart' width='35px'></img>
+				<Button variant="outline-danger" size="sm" onClick={this.addRemoveCity}>Add to Favorites</Button>
 			</div>
 		);
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FavoritesButton);
+export default FavoritesButton;

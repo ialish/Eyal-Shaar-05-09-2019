@@ -49,9 +49,9 @@ class SearchField extends React.Component {
 					name={`Error: ${error}!`}
 					description={'Failed to fetch data from the server.'}
 				/>
-			);
-		}
-
+				);
+			}
+			
 		let mistype;
 		const availableChars = /^[0-9a-zA-Z ]*$/;
 		if (!query.match(availableChars)) {

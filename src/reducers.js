@@ -15,14 +15,6 @@ import {
 	REQUEST_SEARCH_OPTIONS_FAILED
 } from './actionTypes';
 
-/* FavoritesButton component */
-import HeartHollow from './components/FavoritesButton/HeartHollow.svg';
-import {
-	SET_HEART,
-	ADD_CITY,
-	REMOVE_CITY
-} from './actionTypes';
-
 /* CurrentWeather component */
 import {
 	REQUEST_CURRENT_WEATHER_PENDING,
@@ -109,26 +101,6 @@ export const changeInput = (state = initialStateInput, action) => {
 	}
 }
 
-/* FavoritesButton component */
-
-const initialStateFavButton = {
-	favCities: '',
-	heartImage: HeartHollow
-};
-
-export const toggleFavorite = (state = initialStateFavButton, action) => {
-	switch (action.type) {
-		case SET_HEART:
-			return { ...state, ...action.payload };
-		case ADD_CITY:
-			return { ...state, ...action.payload };
-		case REMOVE_CITY:
-			return { ...state, ...action.payload };
-		default:
-			return state;
-	}
-}
-
 /* CurrentWeather component */
 
 const initialStateCurrentWeather = {
@@ -188,7 +160,7 @@ export const updateFavorites = (state = initialStateFavorites, action) => {
 		case REQUEST_FAVORITES_CURRENT_CONDITIONS_PENDING:
 			return { ...state, ...{ isPending: true } };
 		case REQUEST_FAVORITES_CURRENT_CONDITIONS_SUCCESS:
-			return { ...state,  favCitiesData: [...state.favCitiesData, { ...action.payload }], isPending: false };
+			return { ...state,  favCitiesData: [ ...state.favCitiesData, ...action.payload ], isPending: false };
 		case REQUEST_FAVORITES_CURRENT_CONDITIONS_FAILED:
 			return { ...state, ...{ error: action.payload, isPending: false } };
 		default:

@@ -15,15 +15,6 @@ import {
 	REQUEST_SEARCH_OPTIONS_FAILED
 } from './actionTypes';
 
-/* FavoritesButton component */
-import HeartHollow from './components/FavoritesButton/HeartHollow.svg';
-import HeartFull from './components/FavoritesButton/HeartFull.svg';
-import {
-	SET_HEART,
-	ADD_CITY,
-	REMOVE_CITY
-} from './actionTypes';
-
 /* CurrentWeather component */
 import {
 	REQUEST_CURRENT_WEATHER_PENDING,
@@ -117,65 +108,6 @@ export const requestSearchOptions = (query) => {
 				type: REQUEST_SEARCH_OPTIONS_SUCCESS,
 				payload: data
 			}));
-	}
-}
-
-/* FavoritesButton component */
-
-export const setHeart = (favCities, location, heartImage) => {
-	if (favCities) {
-		if (favCities.find(element => element.key === location.key)) {
-			if (heartImage === HeartHollow)
-				return {
-					type: SET_HEART,
-					payload: {
-						favCities,
-						heartImage: HeartFull
-					}
-				}
-		} else {
-			if (heartImage === HeartFull)
-				return {
-					type: SET_HEART,
-					payload: {
-						favCities,
-						heartImage: HeartHollow
-					}
-				}
-		}
-	}
-}
-
-export const addRemoveCity = (favCities, location, heartImage) => {
-	let array;
-
-	if (favCities) {
-		array = [...favCities];
-	} else {
-		array = [];
-	}
-
-	if (heartImage === HeartHollow) {
-		array.push(location);
-		return {
-			type: ADD_CITY,
-			payload: {
-				favCities: array,
-				heartImage: HeartFull
-			}
-		}
-	} else {
-		const index = array.findIndex(element =>
-			element.key === location.key);
-
-		array.splice(index, 1);
-		return {
-			type: REMOVE_CITY,
-			payload: {
-				favCities: array,
-				heartImage: HeartHollow
-			}
-		}
 	}
 }
 
