@@ -42,10 +42,16 @@ class FiveDayForecast extends React.Component {
 			fetchError = (
 				<HandleError
 					name={`Error: ${error}!`}
-					description={'Failed to fetch data from the server.'}
+					description={`Failed to fetch data from the server.`}
 				/>
 			);
+			return (
+				<div className='error-msg'>
+					{fetchError}
+				</div>
+			);
 		}
+
 		return (
 			<div className='five-day-cards'>
 				{DailyForecasts.map((day, index) => {
@@ -62,9 +68,6 @@ class FiveDayForecast extends React.Component {
 						</Card>
 					);
 				})}
-				<div className='error-msg'>
-					{fetchError}
-				</div>
 			</div>
 		);
 	}

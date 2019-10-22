@@ -64,21 +64,17 @@ export const requestCurrentPosition = () => {
 				const longitude = position.coords.longitude;
 				const url = `https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${apiKey}&q=${latitude}%2C${longitude}`;
 				return fetch(url)
-					.then(
-						(response) => response.json(),
-						// It's not good to use catch because that will also catch any 
-						// errors in the dispatch and resulting render, causing a loop 
-						// of 'Unexpected batch number' errors.
-						(error) => dispatch({
-							type: REQUEST_CURRENT_POSITION_FAILED,
-							payload: error.message
-						}))
+					.then((response) => response.json())
 					.then((data) => dispatch({
 						type: REQUEST_CURRENT_POSITION_SUCCESS,
 						payload: {
 							key: data.Key,
 							city: data.LocalizedName
 						}
+					}))
+					.catch((error) => dispatch({
+						type: REQUEST_CURRENT_POSITION_FAILED,
+						payload: error.message
 					}));
 			});
 		}
@@ -99,15 +95,14 @@ export const requestSearchOptions = (query) => {
 		dispatch({ type: REQUEST_SEARCH_OPTIONS_PENDING });
 		const url = `https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${apiKey}&q=${query}`;
 		return fetch(url)
-			.then(
-				(response) => response.json(),
-				(error) => dispatch({
-					type: REQUEST_SEARCH_OPTIONS_FAILED,
-					payload: error.message
-				}))
+			.then((response) => response.json())
 			.then((data) => dispatch({
 				type: REQUEST_SEARCH_OPTIONS_SUCCESS,
 				payload: data
+			}))
+			.catch((error) => dispatch({
+				type: REQUEST_SEARCH_OPTIONS_FAILED,
+				payload: error.message
 			}));
 	}
 }
@@ -119,12 +114,7 @@ export const requestCurrentWeather = (location) => {
 		dispatch({ type: REQUEST_CURRENT_WEATHER_PENDING });
 		const url = `https://dataservice.accuweather.com/currentconditions/v1/${location.key}?apikey=${apiKey}`;
 		return fetch(url)
-			.then(
-				(response) => response.json(),
-				(error) => dispatch({
-					type: REQUEST_CURRENT_WEATHER_FAILED,
-					payload: error.message
-				}))
+			.then((response) => response.json())
 			.then((data) => dispatch({
 				type: REQUEST_CURRENT_WEATHER_SUCCESS,
 				payload: {
@@ -132,6 +122,10 @@ export const requestCurrentWeather = (location) => {
 					degreesC: data[0].Temperature.Metric.Value,
 					weatherText: data[0].WeatherText
 				}
+			}))
+			.catch((error) => dispatch({
+				type: REQUEST_CURRENT_WEATHER_FAILED,
+				payload: error.message
 			}));
 	}
 }
@@ -143,15 +137,14 @@ export const requestFiveDayForecast = (location) => {
 		dispatch({ type: REQUEST_FIVE_DAY_FORECAST_PENDING });
 		const url = `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${location.key}?apikey=${apiKey}&metric=true`;
 		return fetch(url)
-			.then(
-				(response) => response.json(),
-				(error) => dispatch({
-					type: REQUEST_FIVE_DAY_FORECAST_FAILED,
-					payload: error.message
-				}))
+			.then((response) => response.json())
 			.then((data) => dispatch({
 				type: REQUEST_FIVE_DAY_FORECAST_SUCCESS,
 				payload: data.DailyForecasts
+			}))
+			.catch((error) => dispatch({
+				type: REQUEST_FIVE_DAY_FORECAST_FAILED,
+				payload: error.message
 			}));
 	}
 }
@@ -171,12 +164,7 @@ export const requestFavoritesCurrentConditions = (favCities) => {
 			dispatch({ type: REQUEST_FAVORITES_CURRENT_CONDITIONS_PENDING });
 			const url = `https://dataservice.accuweather.com/currentconditions/v1/${location.key}?apikey=${apiKey}`;
 			return fetch(url)
-				.then(
-					(response) => response.json(),
-					(error) => dispatch({
-						type: REQUEST_FAVORITES_CURRENT_CONDITIONS_FAILED,
-						payload: error.message
-					}))
+				.then((response) => response.json())
 				.then((data) => {
 					dispatch({
 						type: REQUEST_FAVORITES_CURRENT_CONDITIONS_SUCCESS,
@@ -186,7 +174,11 @@ export const requestFavoritesCurrentConditions = (favCities) => {
 							weatherText: data[0].WeatherText
 						}
 					})
-				});
+				})
+				.catch((error) => dispatch({
+					type: REQUEST_FAVORITES_CURRENT_CONDITIONS_FAILED,
+					payload: error.message
+				}));
 		});
 	}
 }

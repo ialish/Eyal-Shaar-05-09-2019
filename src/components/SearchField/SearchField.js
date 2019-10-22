@@ -47,10 +47,15 @@ class SearchField extends React.Component {
 			fetchError = (
 				<HandleError
 					name={`Error: ${error}!`}
-					description={'Failed to fetch data from the server.'}
+					description={`Failed to fetch data from the server.`}
 				/>
-				);
-			}
+			);
+			return (
+				<div className='error-msg'>
+					{fetchError}
+				</div>
+			);
+		}
 			
 		let mistype;
 		const availableChars = /^[0-9a-zA-Z ]*$/;
@@ -77,7 +82,6 @@ class SearchField extends React.Component {
 					onChange={this.onChange}
 				/>
 				<div className='error-msg'>
-					{ fetchError }
 					{ mistype }
 				</div>
 			</div>

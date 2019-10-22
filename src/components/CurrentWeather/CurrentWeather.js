@@ -40,18 +40,21 @@ class CurrentWeather extends React.Component {
 			fetchError = (
 				<HandleError
 					name={`Error: ${error}!`}
-					description={'Failed to fetch data from the server.'}
+					description={`Failed to fetch data from the server.`}
 				/>
 			);
+			return (
+				<div className='error-msg'>
+					{fetchError}
+				</div>
+			);
 		}
+
 		return (
 			<div>
 				<h5 className='city'>{currentWeatherData.city}</h5>
 				<h6>{Math.round(currentWeatherData.degreesC)}&deg;C</h6>
 				<h2 className='weather-text'>{currentWeatherData.weatherText}</h2>
-				<div className='error-msg'>
-					{fetchError}
-				</div>
 			</div>
 		);
 	}
