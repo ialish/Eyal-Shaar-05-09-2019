@@ -31,6 +31,7 @@ import {
 
 /* Favorites component */
 import {
+	CLEAR_DATA,
 	REQUEST_FAVORITES_CURRENT_CONDITIONS_PENDING,
 	REQUEST_FAVORITES_CURRENT_CONDITIONS_SUCCESS,
 	REQUEST_FAVORITES_CURRENT_CONDITIONS_FAILED
@@ -156,6 +157,13 @@ export const requestFiveDayForecast = (location) => {
 }
 
 /* Favorites component */
+
+export const clearFavCitiesData = () => {
+	return {
+		type: CLEAR_DATA,
+		payload: []
+	}
+}
 
 export const requestFavoritesCurrentConditions = (favCities) => {
 	return (dispatch) => {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { Card } from 'react-bootstrap';
 import HandleError from '../HandleError';
-import { requestFavoritesCurrentConditions } from '../../actions';
+import { clearFavCitiesData, requestFavoritesCurrentConditions } from '../../actions';
 
 import './Favorites.css';
 
@@ -17,6 +17,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
+		clearData: () => dispatch(clearFavCitiesData()),
 		onRequestFavoritesCurrentConditions: (favCities) => dispatch(requestFavoritesCurrentConditions(favCities))
 	}
 }
@@ -25,6 +26,7 @@ class Favorites extends Component {
 	componentDidMount() {
 		let favCities = JSON.parse(localStorage.getItem('Favorite Cities'));
 		if (favCities) {
+			this.props.clearData();
 			this.props.onRequestFavoritesCurrentConditions(favCities);
 		}
 	}

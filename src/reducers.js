@@ -31,6 +31,7 @@ import {
 
 /* Favorites component */
 import {
+	CLEAR_DATA,
 	REQUEST_FAVORITES_CURRENT_CONDITIONS_PENDING,
 	REQUEST_FAVORITES_CURRENT_CONDITIONS_SUCCESS,
 	REQUEST_FAVORITES_CURRENT_CONDITIONS_FAILED
@@ -157,6 +158,8 @@ const initialStateFavorites = {
 
 export const updateFavorites = (state = initialStateFavorites, action) => {
 	switch (action.type) {
+		case CLEAR_DATA:
+			return { ...state, ...{ favCitiesData: [] } };
 		case REQUEST_FAVORITES_CURRENT_CONDITIONS_PENDING:
 			return { ...state, ...{ isPending: true } };
 		case REQUEST_FAVORITES_CURRENT_CONDITIONS_SUCCESS:
