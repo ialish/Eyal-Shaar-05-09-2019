@@ -1,18 +1,25 @@
 {
   "files": {
     "main.css": "/Eyal-Shaar-05-09-2019/static/css/main.7980693e.chunk.css",
-    "main.js": "/Eyal-Shaar-05-09-2019/static/js/main.3fe1180c.chunk.js",
-    "main.js.map": "/Eyal-Shaar-05-09-2019/static/js/main.3fe1180c.chunk.js.map",
-    "runtime~main.js": "/Eyal-Shaar-05-09-2019/static/js/runtime~main.ec445260.js",
-    "runtime~main.js.map": "/Eyal-Shaar-05-09-2019/static/js/runtime~main.ec445260.js.map",
-    "static/js/2.d0c72e05.chunk.js": "/Eyal-Shaar-05-09-2019/static/js/2.d0c72e05.chunk.js",
-    "static/js/2.d0c72e05.chunk.js.map": "/Eyal-Shaar-05-09-2019/static/js/2.d0c72e05.chunk.js.map",
+    "main.js": "/Eyal-Shaar-05-09-2019/static/js/main.9aa76581.chunk.js",
+    "main.js.map": "/Eyal-Shaar-05-09-2019/static/js/main.9aa76581.chunk.js.map",
+    "runtime-main.js": "/Eyal-Shaar-05-09-2019/static/js/runtime-main.e8423e16.js",
+    "runtime-main.js.map": "/Eyal-Shaar-05-09-2019/static/js/runtime-main.e8423e16.js.map",
+    "static/js/2.6637f665.chunk.js": "/Eyal-Shaar-05-09-2019/static/js/2.6637f665.chunk.js",
+    "static/js/2.6637f665.chunk.js.map": "/Eyal-Shaar-05-09-2019/static/js/2.6637f665.chunk.js.map",
     "index.html": "/Eyal-Shaar-05-09-2019/index.html",
-    "precache-manifest.2e470ebbd970cfe6a2ebbd477affebe6.js": "/Eyal-Shaar-05-09-2019/precache-manifest.2e470ebbd970cfe6a2ebbd477affebe6.js",
+    "precache-manifest.fe5d5c51aac406290f935c761f7db2f6.js": "/Eyal-Shaar-05-09-2019/precache-manifest.fe5d5c51aac406290f935c761f7db2f6.js",
     "service-worker.js": "/Eyal-Shaar-05-09-2019/service-worker.js",
     "static/css/main.7980693e.chunk.css.map": "/Eyal-Shaar-05-09-2019/static/css/main.7980693e.chunk.css.map",
+    "static/js/2.6637f665.chunk.js.LICENSE": "/Eyal-Shaar-05-09-2019/static/js/2.6637f665.chunk.js.LICENSE",
     "static/media/HeartFull.svg": "/Eyal-Shaar-05-09-2019/static/media/HeartFull.efb08012.svg",
     "static/media/HeartHollow.svg": "/Eyal-Shaar-05-09-2019/static/media/HeartHollow.4ed65843.svg",
     "static/media/index.css": "/Eyal-Shaar-05-09-2019/static/media/bg.e108e415.jpg"
-  }
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e8423e16.js",
+    "static/js/2.6637f665.chunk.js",
+    "static/css/main.7980693e.chunk.css",
+    "static/js/main.9aa76581.chunk.js"
+  ]
 }
