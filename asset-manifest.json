@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/Eyal-Shaar-05-09-2019/static/css/main.7980693e.chunk.css",
-    "main.js": "/Eyal-Shaar-05-09-2019/static/js/main.9aa76581.chunk.js",
-    "main.js.map": "/Eyal-Shaar-05-09-2019/static/js/main.9aa76581.chunk.js.map",
-    "runtime-main.js": "/Eyal-Shaar-05-09-2019/static/js/runtime-main.e8423e16.js",
-    "runtime-main.js.map": "/Eyal-Shaar-05-09-2019/static/js/runtime-main.e8423e16.js.map",
-    "static/js/2.6637f665.chunk.js": "/Eyal-Shaar-05-09-2019/static/js/2.6637f665.chunk.js",
-    "static/js/2.6637f665.chunk.js.map": "/Eyal-Shaar-05-09-2019/static/js/2.6637f665.chunk.js.map",
-    "index.html": "/Eyal-Shaar-05-09-2019/index.html",
-    "precache-manifest.fe5d5c51aac406290f935c761f7db2f6.js": "/Eyal-Shaar-05-09-2019/precache-manifest.fe5d5c51aac406290f935c761f7db2f6.js",
-    "service-worker.js": "/Eyal-Shaar-05-09-2019/service-worker.js",
-    "static/css/main.7980693e.chunk.css.map": "/Eyal-Shaar-05-09-2019/static/css/main.7980693e.chunk.css.map",
-    "static/js/2.6637f665.chunk.js.LICENSE": "/Eyal-Shaar-05-09-2019/static/js/2.6637f665.chunk.js.LICENSE",
-    "static/media/HeartFull.svg": "/Eyal-Shaar-05-09-2019/static/media/HeartFull.efb08012.svg",
-    "static/media/HeartHollow.svg": "/Eyal-Shaar-05-09-2019/static/media/HeartHollow.4ed65843.svg",
-    "static/media/index.css": "/Eyal-Shaar-05-09-2019/static/media/bg.e108e415.jpg"
+    "main.css": "/weather-forecast/static/css/main.36f9002b.chunk.css",
+    "main.js": "/weather-forecast/static/js/main.22efe0b7.chunk.js",
+    "main.js.map": "/weather-forecast/static/js/main.22efe0b7.chunk.js.map",
+    "runtime-main.js": "/weather-forecast/static/js/runtime-main.54ab0bab.js",
+    "runtime-main.js.map": "/weather-forecast/static/js/runtime-main.54ab0bab.js.map",
+    "static/js/2.bd80a574.chunk.js": "/weather-forecast/static/js/2.bd80a574.chunk.js",
+    "static/js/2.bd80a574.chunk.js.map": "/weather-forecast/static/js/2.bd80a574.chunk.js.map",
+    "index.html": "/weather-forecast/index.html",
+    "precache-manifest.0280c13760ef4625856a029ae739528e.js": "/weather-forecast/precache-manifest.0280c13760ef4625856a029ae739528e.js",
+    "service-worker.js": "/weather-forecast/service-worker.js",
+    "static/css/main.36f9002b.chunk.css.map": "/weather-forecast/static/css/main.36f9002b.chunk.css.map",
+    "static/js/2.bd80a574.chunk.js.LICENSE": "/weather-forecast/static/js/2.bd80a574.chunk.js.LICENSE",
+    "static/media/HeartFull.svg": "/weather-forecast/static/media/HeartFull.efb08012.svg",
+    "static/media/HeartHollow.svg": "/weather-forecast/static/media/HeartHollow.4ed65843.svg",
+    "static/media/index.css": "/weather-forecast/static/media/bg.e108e415.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.e8423e16.js",
-    "static/js/2.6637f665.chunk.js",
-    "static/css/main.7980693e.chunk.css",
-    "static/js/main.9aa76581.chunk.js"
+    "static/js/runtime-main.54ab0bab.js",
+    "static/js/2.bd80a574.chunk.js",
+    "static/css/main.36f9002b.chunk.css",
+    "static/js/main.22efe0b7.chunk.js"
   ]
 }
