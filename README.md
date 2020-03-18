@@ -1,8 +1,8 @@
-## Weather App
+## Weather Forecast
 
-This is a web app that shows the weather of some city.
+This web application shows the weather of a chosen city.
 
-The user can search for a city and save it to favorites (locally).
+You can search for a city and save it to favorites (locally).
 
 There are 2 pages in this app:
 - Weather Page.
